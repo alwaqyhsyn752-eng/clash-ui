@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>الإعدادات - Clash of Armored</title>
+  <link rel="stylesheet" href="styles/colors.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/buttons.css">
+</head>
+<body>
+  <div class="top-bar">
+    <button class="back-btn" onclick="history.back()">←</button>
+    <span>⚙ الإعدادات</span>
+  </div>
+
+  <div class="screen" style="padding-top: 70px; justify-content: flex-start;">
+    <div class="panel">
+      <label style="display:block; margin-bottom:10px;">
+        🔊 مستوى الصوت:
+        <input type="range" id="volume" min="0" max="100" value="70" style="width:100%;">
+      </label>
+
+      <label style="display:block; margin:15px 0 10px;">
+        🎮 حساسية التحكم:
+        <input type="range" id="sensitivity" min="1" max="10" value="5" style="width:100%;">
+      </label>
+
+      <label style="display:flex; align-items:center; gap:10px; margin:15px 0;">
+        <input type="checkbox" id="sound" checked> تشغيل المؤثرات الصوتية
+      </label>
+
+      <label style="display:flex; align-items:center; gap:10px; margin:15px 0;">
+        <input type="checkbox" id="vibration" checked> الاهتزاز
+      </label>
+
+      <button class="btn btn-primary" onclick="saveSettings()">💾 حفظ</button>
+      <button class="btn" onclick="resetSettings()">🔄 استعادة الافتراضي</button>
+    </div>
+  </div>
+
+  <script>
+    function saveSettings() {
+      const settings = {
+        volume: document.getElementById('volume').value,
+        sensitivity: document.getElementById('sensitivity').value,
+        sound: document.getElementById('sound').checked,
+        vibration: document.getElementById('vibration').checked
+      };
+      localStorage.setItem('coa_settings', JSON.stringify(settings));
+      alert("✅ تم الحفظ");
+    }
+    function resetSettings() {
+      localStorage.removeItem('coa_settings');
+      location.reload();
+    }
+    // تحميل الإعدادات المحفوظة
+    const saved = JSON.parse(localStorage.getItem('coa_settings') || '{}');
+    if (saved.volume) document.getElementById('volume').value = saved.volume;
+    if (saved.sensitivity) document.getElementById('sensitivity').value = saved.sensitivity;
+  </script>
+</body>
+</html>
