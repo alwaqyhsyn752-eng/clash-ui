@@ -1,0 +1,41 @@
+/* ============================================
+   Clash of Armored - Buttons
+   ============================================ */
+.btn {
+  display: block;
+  width: 80%;
+  max-width: 320px;
+  margin: 14px auto;
+  padding: 16px 24px;
+  font-family: var(--font-title);
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--color-text);
+  background: linear-gradient(180deg, var(--color-olive) 0%, var(--color-olive-dark) 100%);
+  border: var(--border-metal);
+  border-radius: 6px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #1a1a1a, inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #1a1a1a;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--color-orange) 0%, var(--color-orange-dark) 100%);
+  box-shadow: 0 4px 0 #663300, var(--shadow-glow);
+}
+
+.btn-danger {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+}
+
+.btn-small {
+  width: auto;
+  padding: 10px 20px;
+  font-size: 14px;
+}
