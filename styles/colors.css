@@ -1,0 +1,33 @@
+/* ============================================
+   Clash of Armored - Military Color System
+   ============================================ */
+:root {
+  /* الألوان الأساسية */
+  --color-bg-dark:      #0d0d0d;   /* أسود عميق */
+  --color-bg-panel:     #1a1a1a;   /* رمادي داكن */
+  --color-bg-card:      #2a2a2a;   /* رمادي متوسط */
+
+  /* الأخضر الزيتي (Olive) */
+  --color-olive-dark:   #3d4a2b;
+  --color-olive:        #5a6e3d;
+  --color-olive-light:  #7d9556;
+
+  /* البرتقالي (Action) */
+  --color-orange:       #ff7b00;
+  --color-orange-dark:  #cc5f00;
+  --color-orange-glow:  #ffb347;
+
+  /* النصوص */
+  --color-text:         #e8e8e8;
+  --color-text-muted:   #9a9a9a;
+  --color-text-danger:  #ff4444;
+
+  /* الحدود والظلال */
+  --border-metal:       2px solid #4a4a4a;
+  --shadow-glow:        0 0 12px rgba(255, 123, 0, 0.6);
+  --shadow-panel:       0 4px 20px rgba(0, 0, 0, 0.8);
+
+  /* الخطوط */
+  --font-main: 'Courier New', monospace;
+  --font-title: 'Impact', 'Arial Black', sans-serif;
+}
