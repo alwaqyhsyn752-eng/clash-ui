@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Clash of Armored</title>
+  <link rel="stylesheet" href="styles/colors.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/buttons.css">
+</head>
+<body>
+  <div class="screen" id="mainMenu">
+    <h1 class="logo">⚔ CLASH OF ARMORED ⚔</h1>
+    <p class="subtitle">CLASH OF ARMORED</p>
+
+    <button class="btn btn-primary" onclick="startGame()">▶ ابدأ المعركة</button>
+    <button class="btn" onclick="goToSettings()">⚙ الإعدادات</button>
+    <button class="btn" onclick="showAbout()">ℹ حول اللعبة</button>
+    <button class="btn btn-danger" onclick="exitGame()">✕ خروج</button>
+
+    <p style="margin-top:30px; font-size:12px; color:var(--color-text-muted);">
+      v0.1.0 — Alpha Build
+    </p>
+  </div>
+
+  <script>
+    function startGame() {
+      // الانتقال لصفحة اللعب (سنضعها في clash-core لاحقاً)
+      alert("🚀 جاري تحميل المعركة...");
+      // window.location.href = "game.html";
+    }
+    function goToSettings() {
+      window.location.href = "settings.html";
+    }
+    function showAbout() {
+      alert("Clash of Armored\nلعبة معارك مدرعات\n© 2026");
+    }
+    function exitGame() {
+      if (confirm("هل تريد الخروج؟")) {
+        window.close();
+      }
+    }
+  </script>
+</body>
+</html>
