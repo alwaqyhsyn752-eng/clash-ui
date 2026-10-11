@@ -3,61 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#05070a">
   <title>الإعدادات - Clash of Armored</title>
   <link rel="stylesheet" href="styles/colors.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/buttons.css">
+  <link rel="stylesheet" href="styles/modern.css">
+  <style>
+    .settings-wrap {
+      min-height: 100vh;
+      padding: 70px 20px 30px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: linear-gradient(180deg, #0a0d12, #05070a);
+    }
+    .settings-box {
+      width: 100%;
+      max-width: 460px;
+      background: linear-gradient(180deg, rgba(22,28,36,0.98), rgba(13,18,24,0.98));
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+    }
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 14px;
+      color: #fff;
+    }
+    .setting-row:last-of-type { border-bottom: none; }
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 140px;
+      height: 6px;
+      background: #0d1218;
+      border-radius: 4px;
+      outline: none;
+      border: 1px solid rgba(255,123,0,0.3);
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #ffb347, #ff7b00);
+      box-shadow: 0 0 10px #ff7b00;
+      cursor: pointer;
+      border: 2px solid #fff;
+    }
+    input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      accent-color: #ff7b00;
+      cursor: pointer;
+    }
+    .setting-value {
+      color: #ffb347;
+      font-weight: 700;
+      min-width: 40px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <div class="top-bar">
-    <button class="back-btn" onclick="history.back()">←</button>
+
+  <div class="top-bar" style="position:fixed;top:0;left:0;right:0;z-index:10;">
+    <button class="back-btn" onclick="goBack()">←</button>
     <span>⚙ الإعدادات</span>
   </div>
 
-  <div class="screen" style="padding-top: 70px; justify-content: flex-start;">
-    <div class="panel">
-      <label style="display:block; margin-bottom:10px;">
-        🔊 مستوى الصوت:
-        <input type="range" id="volume" min="0" max="100" value="70" style="width:100%;">
-      </label>
+  <div class="settings-wrap">
+    <div class="settings-box">
+      <div class="setting-row">
+        <span>🔊 مستوى الصوت</span>
+        <input type="range" id="volume" min="0" max="100" value="70">
+        <span class="setting-value" id="volumeVal">70</span>
+      </div>
 
-      <label style="display:block; margin:15px 0 10px;">
-        🎮 حساسية التحكم:
-        <input type="range" id="sensitivity" min="1" max="10" value="5" style="width:100%;">
-      </label>
+      <div class="setting-row">
+        <span>🎵 الموسيقى</span>
+        <input type="range" id="music" min="0" max="100" value="50">
+        <span class="setting-value" id="musicVal">50</span>
+      </div>
 
-      <label style="display:flex; align-items:center; gap:10px; margin:15px 0;">
-        <input type="checkbox" id="sound" checked> تشغيل المؤثرات الصوتية
-      </label>
+      <div class="setting-row">
+        <span>🎮 الحساسية</span>
+        <input type="range" id="sensitivity" min="1" max="10" value="5">
+        <span class="setting-value" id="sensVal">5</span>
+      </div>
 
-      <label style="display:flex; align-items:center; gap:10px; margin:15px 0;">
-        <input type="checkbox" id="vibration" checked> الاهتزاز
-      </label>
+      <div class="setting-row">
+        <span>🔫 المؤثرات الصوتية</span>
+        <input type="checkbox" id="sound" checked>
+      </div>
 
-      <button class="btn btn-primary" onclick="saveSettings()">💾 حفظ</button>
-      <button class="btn" onclick="resetSettings()">🔄 استعادة الافتراضي</button>
+      <div class="setting-row">
+        <span>📳 الاهتزاز</span>
+        <input type="checkbox" id="vibration" checked>
+      </div>
+
+      <button class="btn-play" style="width:100%;margin-top:20px;" onclick="saveSettings()">💾 حفظ</button>
+      <button class="btn-secondary" style="width:100%;margin-top:10px;padding:14px;" onclick="resetSettings()">
+        <span>🔄 استعادة الافتراضي</span>
+      </button>
     </div>
   </div>
 
+  <div class="toast" id="toast"></div>
+
+  <script src="scripts/audio-manager.js"></script>
   <script>
-    function saveSettings() {
-      const settings = {
-        volume: document.getElementById('volume').value,
-        sensitivity: document.getElementById('sensitivity').value,
-        sound: document.getElementById('sound').checked,
-        vibration: document.getElementById('vibration').checked
-      };
-      localStorage.setItem('coa_settings', JSON.stringify(settings));
-      alert("✅ تم الحفظ");
+    // تحميل الإعدادات
+    const defaults = { volume: 70, music: 50, sensitivity: 5, sound: true, vibration: true };
+
+    function loadSettings() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('coa_settings') || '{}');
+        document.getElementById('volume').value      = saved.volume      ?? defaults.volume;
+        document.getElementById('music').value       = saved.music       ?? defaults.music;
+        document.getElementById('sensitivity').value = saved.sensitivity ?? defaults.sensitivity;
+        document.getElementById('sound').checked     = saved.sound       ?? defaults.sound;
+        document.getElementById('vibration').checked = saved.vibration   ?? defaults.vibration;
+      } catch (e) {}
+      updateLabels();
     }
+
+    function updateLabels() {
+      document.getElementById('volumeVal').textContent = document.getElementById('volume').value;
+      document.getElementById('musicVal').textContent  = document.getElementById('music').value;
+      document.getElementById('sensVal').textContent   = document.getElementById('sensitivity').value;
+    }
+
+    ['volume','music','sensitivity'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updateLabels);
+    });
+
+    function saveSettings() {
+      const s = {
+        volume:      +document.getElementById('volume').value,
+        music:       +document.getElementById('music').value,
+        sensitivity: +document.getElementById('sensitivity').value,
+        sound:       document.getElementById('sound').checked,
+        vibration:   document.getElementById('vibration').checked
+      };
+      localStorage.setItem('coa_settings', JSON.stringify(s));
+      if (window.CoaAudio) {
+        window.CoaAudio.setVolume(s.volume / 100);
+        window.CoaAudio.setEnabled(s.sound);
+        window.CoaAudio.success();
+      }
+      showToast('✅ تم حفظ الإعدادات');
+    }
+
     function resetSettings() {
       localStorage.removeItem('coa_settings');
-      location.reload();
+      loadSettings();
+      if (window.CoaAudio) window.CoaAudio.click();
+      showToast('🔄 تم استعادة الافتراضي');
     }
-    // تحميل الإعدادات المحفوظة
-    const saved = JSON.parse(localStorage.getItem('coa_settings') || '{}');
-    if (saved.volume) document.getElementById('volume').value = saved.volume;
-    if (saved.sensitivity) document.getElementById('sensitivity').value = saved.sensitivity;
+
+    function goBack() {
+      if (window.CoaAudio) window.CoaAudio.click();
+      history.back();
+    }
+
+    let toastTimer;
+    function showToast(msg, dur = 2000) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('visible'), dur);
+    }
+
+    window.addEventListener('DOMContentLoaded', loadSettings);
   </script>
 </body>
 </html>
