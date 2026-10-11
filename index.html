@@ -11,120 +11,95 @@ html,body{width:100%;height:100%;overflow:hidden;background:#05070a;color:#fff;
   font-family:-apple-system,'SF Pro Display','Segoe UI',Roboto,sans-serif;
   user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 
-/* ================= SPLASH ================= */
+/* ============ SPLASH ============ */
 #splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;
   align-items:center;justify-content:center;overflow:hidden;
   background:radial-gradient(circle at 50% 45%,#1a0f05 0%,#0a0603 50%,#05070a 100%);
-  transition:opacity .7s cubic-bezier(.4,0,.2,1)}
+  transition:opacity .7s}
 #splash.hide{opacity:0;pointer-events:none}
-
-/* Mesh gradient background */
 .mesh{position:absolute;inset:-20%;z-index:0;filter:blur(60px);opacity:.6}
 .mesh span{position:absolute;border-radius:50%}
 .mesh span:nth-child(1){width:60vw;height:60vw;left:10%;top:10%;
-  background:radial-gradient(circle,#ff7b00 0%,transparent 70%);
-  animation:orbit1 18s ease-in-out infinite}
+  background:radial-gradient(circle,#ff7b00,transparent 70%);animation:o1 18s ease-in-out infinite}
 .mesh span:nth-child(2){width:50vw;height:50vw;right:5%;bottom:15%;
-  background:radial-gradient(circle,#00e5ff 0%,transparent 70%);
-  animation:orbit2 22s ease-in-out infinite}
+  background:radial-gradient(circle,#00e5ff,transparent 70%);animation:o2 22s ease-in-out infinite}
 .mesh span:nth-child(3){width:40vw;height:40vw;left:30%;bottom:5%;
-  background:radial-gradient(circle,#7dff56 0%,transparent 70%);
-  animation:orbit3 20s ease-in-out infinite}
-@keyframes orbit1{0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(15%,20%) scale(1.2)}}
-@keyframes orbit2{0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(-15%,-20%) scale(1.15)}}
-@keyframes orbit3{0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(-20%,15%) scale(1.1)}}
-
-/* خطوط شبكة */
+  background:radial-gradient(circle,#7dff56,transparent 70%);animation:o3 20s ease-in-out infinite}
+@keyframes o1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(15%,20%) scale(1.2)}}
+@keyframes o2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-15%,-20%) scale(1.15)}}
+@keyframes o3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-20%,15%) scale(1.1)}}
 .grid{position:absolute;inset:0;z-index:1;
   background-image:linear-gradient(rgba(255,123,0,.06) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,123,0,.06) 1px,transparent 1px);
   background-size:50px 50px;opacity:.5;
   mask:radial-gradient(circle at 50% 50%,#000 30%,transparent 75%);
   -webkit-mask:radial-gradient(circle at 50% 50%,#000 30%,transparent 75%);
-  animation:gridMove 15s linear infinite}
-@keyframes gridMove{to{background-position:50px 50px}}
-
-/* الشعار */
+  animation:gM 15s linear infinite}
+@keyframes gM{to{background-position:50px 50px}}
 .logo{position:relative;z-index:3;font-family:Impact,'Arial Black',sans-serif;
   font-size:clamp(38px,11vw,72px);line-height:.95;text-align:center;
   letter-spacing:3px;opacity:0;transform:translateY(40px) scale(.85);
-  animation:logoEntry 1.4s cubic-bezier(.34,1.56,.64,1) .3s forwards}
+  animation:lE 1.4s cubic-bezier(.34,1.56,.64,1) .3s forwards}
 .logo span{display:block;
   background:linear-gradient(180deg,#fff 0%,#ffd8a8 20%,#ffb347 45%,#ff7b00 75%,#7a3a00 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 20px rgba(255,123,0,.9))
-         drop-shadow(0 4px 0 rgba(0,0,0,.5));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 20px rgba(255,123,0,.9)) drop-shadow(0 4px 0 rgba(0,0,0,.5));
   position:relative}
 .logo span::after{content:attr(data-t);position:absolute;inset:0;
   background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.9) 50%,transparent 60%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  animation:shine 3s ease-in-out infinite}
-@keyframes logoEntry{to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes shine{0%,60%{background-position:-200% 0}
-  100%{background-position:200% 0}}
-
+  background-size:200% 100%;animation:shine 3s ease-in-out infinite}
+@keyframes lE{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes shine{0%,60%{background-position:-200% 0}100%{background-position:200% 0}}
 .tag{position:relative;z-index:3;margin-top:10px;font-size:11px;font-weight:600;
-  letter-spacing:10px;color:#00e5ff;text-shadow:0 0 12px #00e5ff,0 0 25px rgba(0,229,255,.5);
-  opacity:0;animation:fadeIn .9s ease 1.5s forwards}
-@keyframes fadeIn{to{opacity:1}}
-
-/* شريط التحميل */
+  letter-spacing:10px;color:#00e5ff;text-shadow:0 0 12px #00e5ff;
+  opacity:0;animation:fi .9s ease 1.5s forwards}
+@keyframes fi{to{opacity:1}}
 .loader{position:relative;z-index:3;width:min(82%,380px);margin-top:56px;
-  opacity:0;animation:fadeIn .7s ease 1.7s forwards}
+  opacity:0;animation:fi .7s ease 1.7s forwards}
 .bar{width:100%;height:12px;background:rgba(0,0,0,.7);border-radius:12px;
   overflow:hidden;position:relative;
-  box-shadow:inset 0 2px 8px rgba(0,0,0,.9),
-             0 0 0 1px rgba(255,123,0,.3),
-             0 0 20px rgba(255,123,0,.25)}
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.9),0 0 0 1px rgba(255,123,0,.3)}
 .fill{height:100%;width:0%;border-radius:10px;position:relative;
   background:linear-gradient(90deg,#ff7b00 0%,#ffb347 50%,#00e5ff 100%);
-  box-shadow:0 0 15px #ff7b00,0 0 30px #ffb347;
-  transition:width .12s linear;overflow:hidden}
+  box-shadow:0 0 15px #ff7b00;transition:width .12s linear;overflow:hidden}
 .fill::after{content:'';position:absolute;inset:0;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);
-  animation:shineBar 1.3s linear infinite}
-@keyframes shineBar{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
-.bar-info{display:flex;justify-content:space-between;margin-top:14px;
-  font-size:13px;font-weight:600;letter-spacing:1px;
-  color:#fff;text-shadow:0 0 8px rgba(255,123,0,.6)}
+  animation:sB 1.3s linear infinite}
+@keyframes sB{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.binfo{display:flex;justify-content:space-between;margin-top:14px;
+  font-size:13px;font-weight:600;letter-spacing:1px}
 .pct{color:#ffb347;font-weight:900}
-
 .tip{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
   z-index:3;font-size:12px;color:rgba(255,255,255,.4);letter-spacing:2px;
-  opacity:0;animation:fadeIn 1s ease 2.2s forwards}
+  opacity:0;animation:fi 1s ease 2.2s forwards}
 
-/* ================= AUTH ================= */
+/* ============ AUTH ============ */
 #auth{position:fixed;inset:0;z-index:8000;display:none;flex-direction:column;
   align-items:center;justify-content:center;padding:20px;overflow-y:auto;
   background:radial-gradient(circle at 50% 25%,rgba(255,123,0,.18),transparent 55%),
     radial-gradient(circle at 50% 80%,rgba(0,229,255,.1),transparent 60%),
     linear-gradient(180deg,#0a0d12,#05070a)}
 #auth.show{display:flex}
-.auth-wrap{width:100%;max-width:390px;animation:cardIn .6s cubic-bezier(.34,1.56,.64,1)}
-@keyframes cardIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.auth-logo{font-family:Impact,'Arial Black',sans-serif;text-align:center;
+.aw{width:100%;max-width:390px;animation:cI .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes cI{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.aLogo{font-family:Impact,'Arial Black',sans-serif;text-align:center;
   font-size:clamp(28px,9vw,46px);line-height:.95;letter-spacing:3px;margin-bottom:6px;
   background:linear-gradient(180deg,#fff,#ffb347 50%,#ff7b00);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   filter:drop-shadow(0 0 15px rgba(255,123,0,.8))}
-.auth-tag{text-align:center;font-size:10px;letter-spacing:8px;color:#00e5ff;
+.aTag{text-align:center;font-size:10px;letter-spacing:8px;color:#00e5ff;
   text-shadow:0 0 10px #00e5ff;margin-bottom:30px}
 .card{background:linear-gradient(180deg,rgba(22,28,36,.92),rgba(13,18,24,.96));
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border:1px solid rgba(255,179,71,.4);border-radius:24px;
   padding:28px 22px;position:relative;
-  box-shadow:0 30px 70px rgba(0,0,0,.85),
-             0 0 0 1px rgba(255,255,255,.06) inset,
-             0 1px 0 rgba(255,255,255,.15) inset}
+  box-shadow:0 30px 70px rgba(0,0,0,.85),0 1px 0 rgba(255,255,255,.15) inset}
 .card::before{content:'';position:absolute;inset:-1px;border-radius:24px;
   padding:1px;background:linear-gradient(135deg,rgba(255,123,0,.7),transparent 40%,rgba(0,229,255,.5));
   -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.7}
-.card-title{font-size:18px;font-weight:800;text-align:center;margin-bottom:22px;
+.cT{font-size:18px;font-weight:800;text-align:center;margin-bottom:22px;
   letter-spacing:2px;text-shadow:0 0 12px rgba(255,179,71,.6)}
 .fg{margin-bottom:14px}
 .fg label{display:block;font-size:11px;font-weight:700;color:#ffb347;
@@ -135,21 +110,18 @@ html,body{width:100%;height:100%;overflow:hidden;background:#05070a;color:#fff;
   transition:all .25s}
 .inp::placeholder{color:rgba(255,255,255,.2)}
 .inp:focus{border-color:#ff7b00;background:rgba(0,0,0,.7);
-  box-shadow:0 0 20px rgba(255,123,0,.35),inset 0 0 8px rgba(255,123,0,.1)}
+  box-shadow:0 0 20px rgba(255,123,0,.35)}
 .btn{width:100%;padding:16px;font-size:14px;font-weight:800;letter-spacing:2px;
   border-radius:14px;cursor:pointer;border:none;font-family:inherit;
   display:flex;align-items:center;justify-content:center;gap:10px;
-  transition:transform .08s,box-shadow .08s,filter .2s}
+  transition:transform .08s,box-shadow .08s}
 .btn:active{filter:brightness(1.1)}
-.bp{background:linear-gradient(180deg,#ffb347 0%,#ff7b00 55%,#cc5f00 100%);
-  color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7);
+.bp{background:linear-gradient(180deg,#ffb347,#ff7b00 55%,#cc5f00);color:#fff;
+  text-shadow:0 1px 4px rgba(0,0,0,.7);
   box-shadow:0 5px 0 #7a3a00,0 10px 24px rgba(255,123,0,.55),
-    inset 0 1px 0 rgba(255,255,255,.5),
-    inset 0 -3px 8px rgba(0,0,0,.35)}
-.bp:active{transform:translateY(4px);box-shadow:0 1px 0 #7a3a00,0 3px 12px rgba(255,123,0,.5),
-  inset 0 1px 0 rgba(255,255,255,.5)}
-.bg1{background:#fff;color:#1a1a1a;margin-top:10px;
-  box-shadow:0 5px 0 #999,0 8px 20px rgba(0,0,0,.3)}
+    inset 0 1px 0 rgba(255,255,255,.5),inset 0 -3px 8px rgba(0,0,0,.35)}
+.bp:active{transform:translateY(4px);box-shadow:0 1px 0 #7a3a00}
+.bg1{background:#fff;color:#1a1a1a;margin-top:10px;box-shadow:0 5px 0 #999}
 .bg1:active{transform:translateY(4px);box-shadow:0 1px 0 #999}
 .bg2{background:rgba(0,229,255,.12);color:#00e5ff;
   border:2px solid rgba(0,229,255,.5);margin-top:10px}
@@ -163,38 +135,26 @@ html,body{width:100%;height:100%;overflow:hidden;background:#05070a;color:#fff;
   margin-bottom:14px;display:none;text-align:center;font-weight:600}
 .err.show{display:block}
 .sw{text-align:center;margin-top:18px;font-size:12px;color:rgba(255,255,255,.5)}
-.sw a{color:#ffb347;cursor:pointer;font-weight:800;text-decoration:none;
-  text-shadow:0 0 8px rgba(255,179,71,.5)}
-.avs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0 20px}
-.av{aspect-ratio:1;border-radius:50%;background:rgba(255,179,71,.1);
-  border:2px solid rgba(255,179,71,.3);color:#ffb347;
-  font-size:17px;font-weight:900;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s cubic-bezier(.34,1.56,.64,1)}
-.av.sel{background:linear-gradient(135deg,#ff7b00,#ffb347);color:#fff;
-  border-color:#fff;transform:scale(1.15);
-  box-shadow:0 0 20px #ff7b00,0 0 40px rgba(255,123,0,.5)}
+.sw a{color:#ffb347;cursor:pointer;font-weight:800;text-decoration:none}
 
-/* ================= LOBBY ================= */
+/* ============ LOBBY ============ */
 #lobby{position:fixed;inset:0;display:none;flex-direction:column;overflow:hidden;
   background:linear-gradient(180deg,#0a0d12 0%,#0d1218 55%,#05070a 100%)}
 #lobby.show{display:flex}
-
-.bgwrap{position:absolute;inset:0;z-index:0;overflow:hidden}
-.bgwrap::before{content:'';position:absolute;inset:-25%;
+.bw{position:absolute;inset:0;z-index:0;overflow:hidden}
+.bw::before{content:'';position:absolute;inset:-25%;
   background:radial-gradient(circle at 15% 25%,rgba(255,123,0,.22),transparent 42%),
     radial-gradient(circle at 85% 65%,rgba(0,229,255,.14),transparent 48%),
     radial-gradient(circle at 50% 95%,rgba(255,123,0,.28),transparent 55%);
-  animation:bgMove 14s ease-in-out infinite alternate;filter:blur(30px)}
-@keyframes bgMove{to{transform:translate(-4%,3%) scale(1.1)}}
-.bgwrap::after{content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle at 50% 50%,transparent 30%,rgba(0,0,0,.6) 90%);
+  animation:bM 14s ease-in-out infinite alternate;filter:blur(30px)}
+@keyframes bM{to{transform:translate(-4%,3%) scale(1.1)}}
+.bw::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,transparent 30%,rgba(0,0,0,.6) 90%);
   pointer-events:none}
 .parts{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-.p{position:absolute;bottom:-30px;border-radius:50%;opacity:0;animation:rise linear infinite;
-  will-change:transform,opacity}
+.p{position:absolute;bottom:-30px;border-radius:50%;opacity:0;animation:rise linear infinite}
 .p.fire{background:radial-gradient(circle,#ffd54f 0%,#ff7b00 35%,transparent 70%);
-  box-shadow:0 0 15px #ff7b00,0 0 30px rgba(255,123,0,.5)}
+  box-shadow:0 0 15px #ff7b00}
 .p.smoke{background:radial-gradient(circle,rgba(90,90,90,.5) 0%,transparent 70%)}
 @keyframes rise{0%{transform:translateY(0) translateX(0) scale(.5);opacity:0}
   10%{opacity:.9}90%{opacity:.6}
@@ -207,91 +167,107 @@ html,body{width:100%;height:100%;overflow:hidden;background:#05070a;color:#fff;
   background:linear-gradient(135deg,rgba(30,35,42,.75),rgba(15,18,24,.85));
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
   border:1px solid rgba(255,179,71,.35);border-radius:44px;
-  box-shadow:0 6px 24px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12),
-    0 0 20px rgba(255,123,0,.1);cursor:pointer;
-  transition:transform .15s}
+  box-shadow:0 6px 24px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12);
+  cursor:pointer;transition:transform .15s}
 .pcard:active{transform:scale(.96)}
 .pav{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;font-size:20px;font-weight:900;color:#fff;
+  justify-content:center;font-size:20px;font-weight:900;color:#fff;overflow:hidden;
   background:linear-gradient(135deg,#ffb347,#ff7b00);
   border:2px solid rgba(255,255,255,.4);
-  box-shadow:0 0 18px rgba(255,123,0,.8),inset 0 2px 4px rgba(255,255,255,.3);
-  text-shadow:0 1px 3px rgba(0,0,0,.6);position:relative}
-.pav::after{content:'';position:absolute;inset:-3px;border-radius:50%;
-  border:2px solid rgba(255,179,71,.6);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:.8}
-  50%{transform:scale(1.1);opacity:.3}}
+  box-shadow:0 0 18px rgba(255,123,0,.8)}
+.pav svg{width:100%;height:100%}
 .pinfo{display:flex;flex-direction:column;min-width:0}
 .pname{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;
-  text-overflow:ellipsis;max-width:110px;
-  text-shadow:0 0 8px rgba(255,179,71,.6)}
+  text-overflow:ellipsis;max-width:110px}
 .pline{display:flex;align-items:center;gap:6px;margin-top:3px}
 .lvlb{font-size:9px;font-weight:900;padding:2px 8px;border-radius:8px;
-  background:linear-gradient(135deg,#ff7b00,#ffb347);color:#000;
-  letter-spacing:1px;box-shadow:0 0 8px rgba(255,123,0,.6)}
+  background:linear-gradient(135deg,#ff7b00,#ffb347);color:#000;letter-spacing:1px}
 .xp{width:58px;height:5px;background:rgba(0,0,0,.7);border-radius:4px;
-  overflow:hidden;border:1px solid rgba(255,179,71,.3);position:relative}
-.xpf{height:100%;width:0%;border-radius:4px;transition:width .4s ease;
-  background:linear-gradient(90deg,#00e5ff,#7dff56);
-  box-shadow:0 0 10px #00e5ff,0 0 20px rgba(0,229,255,.5)}
+  overflow:hidden;border:1px solid rgba(255,179,71,.3)}
+.xpf{height:100%;width:0%;border-radius:4px;transition:width .4s;
+  background:linear-gradient(90deg,#00e5ff,#7dff56);box-shadow:0 0 10px #00e5ff}
 .curs{display:flex;gap:6px}
 .cur{display:flex;align-items:center;gap:5px;padding:7px 12px;
   background:linear-gradient(135deg,rgba(30,35,42,.75),rgba(15,18,24,.85));
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
   border:1px solid rgba(255,179,71,.35);border-radius:30px;
-  font-size:12px;font-weight:800;
-  box-shadow:0 4px 16px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1)}
+  font-size:12px;font-weight:800}
 .cur.g{color:#ffd54f;text-shadow:0 0 8px rgba(255,213,79,.5)}
 .cur.d{color:#00e5ff;text-shadow:0 0 8px rgba(0,229,255,.5)}
 .itop{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;
   justify-content:center;font-size:20px;cursor:pointer;color:#fff;
   background:linear-gradient(135deg,rgba(30,35,42,.75),rgba(15,18,24,.85));
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border:1px solid rgba(255,179,71,.35);
-  box-shadow:0 6px 20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12)}
+  border:1px solid rgba(255,179,71,.35)}
 .itop:active{transform:scale(.88)}
 
+/* ============ STAGE (CHARACTER) ============ */
 .stage{position:relative;z-index:5;flex:1;display:flex;align-items:center;
-  justify-content:center;padding:10px;min-height:0}
-.tankWrap{position:relative;width:min(220px,55vw);aspect-ratio:.85;
-  animation:tankFloat 4s ease-in-out infinite;
-  filter:drop-shadow(0 30px 40px rgba(0,0,0,.8))
-    drop-shadow(0 0 40px rgba(255,123,0,.6))}
-@keyframes tankFloat{0%,100%{transform:translateY(0) rotate(-1deg)}
-  50%{transform:translateY(-16px) rotate(1deg)}}
-.tankWrap svg{width:100%;height:100%;display:block;overflow:visible}
+  justify-content:center;padding:10px;min-height:0;flex-direction:column}
+.charWrap{position:relative;width:min(280px,70vw);height:min(340px,55vh);
+  display:flex;align-items:center;justify-content:center;
+  animation:cFloat 4s ease-in-out infinite}
+@keyframes cFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.charWrap svg{width:100%;height:100%;overflow:visible;
+  filter:drop-shadow(0 25px 40px rgba(0,0,0,.85)) drop-shadow(0 0 40px rgba(255,123,0,.4))}
+.charInfo{position:relative;z-index:6;text-align:center;margin-top:6px;
+  padding:10px 20px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(30,35,42,.85),rgba(15,18,24,.9));
+  backdrop-filter:blur(18px);border:1px solid rgba(255,179,71,.4);
+  box-shadow:0 8px 24px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.15)}
+.charName{font-size:16px;font-weight:900;letter-spacing:1px;
+  text-shadow:0 0 12px rgba(255,179,71,.7)}
+.charSub{font-size:10px;color:#9a9a9a;margin-top:2px;letter-spacing:2px}
+.rarity{display:inline-block;padding:2px 10px;border-radius:8px;
+  font-size:9px;font-weight:900;letter-spacing:1px;margin-top:6px}
+.rarity.common{background:linear-gradient(135deg,#6b7280,#4b5563);color:#fff}
+.rarity.rare{background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff}
+.rarity.epic{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;
+  box-shadow:0 0 15px rgba(168,85,247,.7)}
+.rarity.legendary{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000;
+  box-shadow:0 0 20px rgba(251,191,36,.9);animation:legP 1.6s ease-in-out infinite}
+@keyframes legP{0%,100%{box-shadow:0 0 20px rgba(251,191,36,.9)}
+  50%{box-shadow:0 0 35px rgba(251,191,36,1)}}
 
-.ring,.ring2{position:absolute;bottom:6%;left:50%;transform:translateX(-50%);
-  border-radius:50%;pointer-events:none}
-.ring{width:60%;aspect-ratio:1;border:2px dashed rgba(255,123,0,.5);
-  box-shadow:0 0 40px rgba(255,123,0,.4),inset 0 0 40px rgba(255,123,0,.2);
-  animation:rotate 15s linear infinite}
-.ring2{width:75%;aspect-ratio:1;border:1px solid rgba(0,229,255,.3);
-  animation:rotate 25s linear infinite reverse;
-  box-shadow:0 0 40px rgba(0,229,255,.3)}
-@keyframes rotate{to{transform:translateX(-50%) rotate(360deg)}}
+/* Character picker */
+.picker{position:relative;z-index:6;display:flex;gap:8px;overflow-x:auto;
+  padding:10px 14px;width:100%;scrollbar-width:none;
+  -ms-overflow-style:none}
+.picker::-webkit-scrollbar{display:none}
+.pick{flex:0 0 auto;width:56px;height:56px;border-radius:14px;cursor:pointer;
+  background:linear-gradient(135deg,rgba(30,35,42,.85),rgba(15,18,24,.95));
+  border:2px solid rgba(255,179,71,.3);display:flex;align-items:center;
+  justify-content:center;overflow:hidden;transition:transform .15s,border-color .15s;
+  position:relative}
+.pick:active{transform:scale(.9)}
+.pick svg{width:80%;height:80%}
+.pick.sel{border-color:#ffb347;box-shadow:0 0 20px rgba(255,179,71,.8);
+  transform:translateY(-4px)}
+.pick.sel::after{content:'';position:absolute;inset:-4px;border-radius:16px;
+  border:2px solid rgba(255,179,71,.6);animation:pulse2 1.8s ease-in-out infinite}
+@keyframes pulse2{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.08);opacity:.3}}
 
+/* ============ SIDES ============ */
 .sides{position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:10;
   display:flex;flex-direction:column;gap:10px}
-.sic{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;
-  justify-content:center;font-size:22px;cursor:pointer;color:#fff;position:relative;
+.sic{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;
+  justify-content:center;font-size:21px;cursor:pointer;color:#fff;position:relative;
   background:linear-gradient(135deg,rgba(30,35,42,.8),rgba(15,18,24,.9));
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border:1px solid rgba(255,179,71,.4);
-  box-shadow:0 8px 24px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.15),
-    0 0 15px rgba(255,123,0,.15);
+  backdrop-filter:blur(18px);border:1px solid rgba(255,179,71,.4);
+  box-shadow:0 8px 24px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.15);
   transition:transform .15s}
 .sic:active{transform:scale(.85)}
 .sic .b{position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;
   border-radius:11px;background:linear-gradient(135deg,#ff3b30,#ff7b00);
   color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;
   justify-content:center;padding:0 6px;border:2px solid #fff;
-  box-shadow:0 0 15px #ff3b30;animation:bounce 1.5s ease-in-out infinite}
-@keyframes bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+  box-shadow:0 0 15px #ff3b30;animation:bounce2 1.5s ease-in-out infinite}
+@keyframes bounce2{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
 
+/* ============ BOTTOM ============ */
 .bottom{position:relative;z-index:10;padding:14px;
   padding-bottom:calc(22px + env(safe-area-inset-bottom,0px));
-  display:flex;flex-direction:column;gap:12px}
+  display:flex;flex-direction:column;gap:10px}
 .bPlay{position:relative;width:100%;max-width:430px;margin:0 auto;
   padding:20px 24px;font-family:Impact,'Arial Black',sans-serif;
   font-size:23px;letter-spacing:5px;color:#fff;
@@ -299,50 +275,38 @@ html,body{width:100%;height:100%;overflow:hidden;background:#05070a;color:#fff;
   background:linear-gradient(180deg,#ffc670 0%,#ffb347 20%,#ff7b00 65%,#b34e00 100%);
   border:2px solid #ffd8a8;border-radius:20px;cursor:pointer;overflow:hidden;
   box-shadow:0 8px 0 #5a2800,0 14px 30px rgba(255,123,0,.6),
-    inset 0 2px 0 rgba(255,255,255,.6),
-    inset 0 -6px 14px rgba(0,0,0,.4),
-    0 0 40px rgba(255,123,0,.35);
+    inset 0 2px 0 rgba(255,255,255,.6),inset 0 -6px 14px rgba(0,0,0,.4);
   transition:transform .1s,box-shadow .1s}
 .bPlay::before{content:'';position:absolute;inset:0;
   background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.7) 50%,transparent 70%);
   transform:translateX(-150%);animation:bShine 3.5s ease-in-out infinite}
 @keyframes bShine{0%,65%{transform:translateX(-150%)}100%{transform:translateX(150%)}}
 .bPlay:active{transform:translateY(6px);
-  box-shadow:0 2px 0 #5a2800,0 6px 16px rgba(255,123,0,.5),
-    inset 0 2px 0 rgba(255,255,255,.6),
-    inset 0 -3px 10px rgba(0,0,0,.4)}
-
+  box-shadow:0 2px 0 #5a2800,0 6px 16px rgba(255,123,0,.5)}
 .row{display:flex;gap:8px;justify-content:center;max-width:430px;
   margin:0 auto;width:100%}
 .bsec{flex:1;padding:13px 6px;font-size:11px;font-weight:800;
   letter-spacing:1px;color:#fff;cursor:pointer;
   background:linear-gradient(135deg,rgba(30,35,42,.8),rgba(15,18,24,.9));
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border:1px solid rgba(255,179,71,.4);border-radius:16px;
-  display:flex;flex-direction:column;align-items:center;gap:5px;
+  backdrop-filter:blur(18px);border:1px solid rgba(255,179,71,.4);
+  border-radius:16px;display:flex;flex-direction:column;align-items:center;gap:5px;
   box-shadow:0 5px 0 rgba(0,0,0,.7),0 10px 24px rgba(0,0,0,.5),
     inset 0 1px 0 rgba(255,255,255,.12);
   transition:transform .1s,box-shadow .1s}
-.bsec:active{transform:translateY(4px);
-  box-shadow:0 1px 0 rgba(0,0,0,.7),0 3px 10px rgba(0,0,0,.5)}
+.bsec:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.7)}
 .bsec .ic{font-size:22px;filter:drop-shadow(0 0 6px currentColor)}
-.bsec.or{color:#ffb347;border-color:rgba(255,179,71,.6)}
-.bsec.cy{color:#00e5ff;border-color:rgba(0,229,255,.6)}
-.bsec.gr{color:#7dff56;border-color:rgba(125,255,86,.6)}
-.bsec.rd{color:#ff6b6b;border-color:rgba(255,107,107,.6)}
+.bsec.or{color:#ffb347}.bsec.cy{color:#00e5ff}
+.bsec.gr{color:#7dff56}.bsec.rd{color:#ff6b6b}
 
-/* MODAL */
+/* ============ MODAL ============ */
 .ov{position:fixed;inset:0;z-index:200;display:none;align-items:center;
   justify-content:center;padding:20px;background:rgba(0,0,0,.8);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  animation:fadeIn .25s ease}
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .ov.show{display:flex}
 .box{width:100%;max-width:430px;max-height:85vh;overflow-y:auto;
   background:linear-gradient(180deg,rgba(24,30,38,.98),rgba(13,18,24,.98));
   border:1px solid rgba(255,179,71,.45);border-radius:22px;padding:24px 20px;
-  box-shadow:0 30px 70px rgba(0,0,0,.9),
-    inset 0 1px 0 rgba(255,255,255,.1),
-    0 0 30px rgba(255,123,0,.2);
+  box-shadow:0 30px 70px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.1);
   animation:boxIn .35s cubic-bezier(.34,1.56,.64,1)}
 @keyframes boxIn{from{opacity:0;transform:translateY(30px) scale(.94)}
   to{opacity:1;transform:translateY(0) scale(1)}}
@@ -357,55 +321,47 @@ html,body{width:100%;height:100%;overflow:hidden;background:#05070a;color:#fff;
   font-weight:800;letter-spacing:2px;color:#fff;cursor:pointer;
   background:linear-gradient(180deg,#ff7b00,#cc5f00);
   border:1px solid #ffb347;border-radius:14px;
-  box-shadow:0 5px 0 #7a3a00,inset 0 1px 0 rgba(255,255,255,.3);
-  font-family:inherit}
+  box-shadow:0 5px 0 #7a3a00;font-family:inherit}
 .bclose:active{transform:translateY(4px);box-shadow:0 1px 0 #7a3a00}
 
+/* ============ TOAST ============ */
 .toast{position:fixed;bottom:110px;left:50%;
   transform:translateX(-50%) translateY(80px);z-index:500;
   max-width:90%;padding:14px 24px;font-size:13px;font-weight:600;
   text-align:center;color:#fff;border-radius:14px;
   background:linear-gradient(180deg,rgba(24,30,38,.98),rgba(13,18,24,.98));
   border:1px solid rgba(255,179,71,.5);
-  box-shadow:0 15px 40px rgba(0,0,0,.8),0 0 25px rgba(255,123,0,.3);
+  box-shadow:0 15px 40px rgba(0,0,0,.8);
   opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- SPLASH -->
 <div id="splash">
   <div class="mesh"><span></span><span></span><span></span></div>
   <div class="grid"></div>
-
   <div class="logo">
     <span data-t="CLASH">CLASH</span>
     <span data-t="OF">OF</span>
     <span data-t="ARMORED">ARMORED</span>
   </div>
   <div class="tag">SURVIVE · FIGHT · WIN</div>
-
   <div class="loader">
     <div class="bar"><div class="fill" id="fill"></div></div>
-    <div class="bar-info">
-      <span>جاري التحميل</span>
-      <span class="pct" id="pct">0%</span>
-    </div>
+    <div class="binfo"><span>جاري التحميل</span><span class="pct" id="pct">0%</span></div>
   </div>
   <div class="tip" id="tip">جاري تجهيز المدرعة...</div>
 </div>
 
-<!-- AUTH -->
-<div id="auth"><div class="auth-wrap" id="authWrap"></div></div>
+<div id="auth"><div class="aw" id="aw"></div></div>
 
-<!-- LOBBY -->
 <div id="lobby">
-  <div class="bgwrap"><div class="parts" id="parts"></div></div>
+  <div class="bw"><div class="parts" id="parts"></div></div>
 
   <div class="hud">
     <div class="pcard" data-act="profile">
-      <div class="pav" id="pav">C</div>
+      <div class="pav" id="pav"></div>
       <div class="pinfo">
         <div class="pname" id="pname">Commander</div>
         <div class="pline">
@@ -422,101 +378,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#05070a;color:#fff;
   </div>
 
   <div class="stage">
-    <div class="ring"></div>
-    <div class="ring2"></div>
-    <div class="tankWrap">
-      <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="track" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#3a3a3a"/>
-            <stop offset="50%" stop-color="#1a1a1a"/>
-            <stop offset="100%" stop-color="#0a0a0a"/>
-          </linearGradient>
-          <linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#8fa869"/>
-            <stop offset="35%" stop-color="#6f8551"/>
-            <stop offset="70%" stop-color="#4a5a35"/>
-            <stop offset="100%" stop-color="#2a3418"/>
-          </linearGradient>
-          <radialGradient id="turretG" cx=".3" cy=".3" r=".75">
-            <stop offset="0%" stop-color="#a0b878"/>
-            <stop offset="40%" stop-color="#6f8551"/>
-            <stop offset="80%" stop-color="#3d4a2b"/>
-            <stop offset="100%" stop-color="#1a2010"/>
-          </radialGradient>
-          <linearGradient id="barrel" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#0a0a0a"/>
-            <stop offset="50%" stop-color="#3a3a3a"/>
-            <stop offset="100%" stop-color="#0a0a0a"/>
-          </linearGradient>
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        </defs>
-
-        <!-- الجنازير -->
-        <rect x="8" y="40" width="34" height="180" rx="8" fill="url(#track)"/>
-        <rect x="158" y="40" width="34" height="180" rx="8" fill="url(#track)"/>
-        <g fill="#252525">
-          <rect x="8" y="55" width="34" height="5"/>
-          <rect x="8" y="75" width="34" height="5"/>
-          <rect x="8" y="95" width="34" height="5"/>
-          <rect x="8" y="115" width="34" height="5"/>
-          <rect x="8" y="135" width="34" height="5"/>
-          <rect x="8" y="155" width="34" height="5"/>
-          <rect x="8" y="175" width="34" height="5"/>
-          <rect x="8" y="195" width="34" height="5"/>
-          <rect x="158" y="55" width="34" height="5"/>
-          <rect x="158" y="75" width="34" height="5"/>
-          <rect x="158" y="95" width="34" height="5"/>
-          <rect x="158" y="115" width="34" height="5"/>
-          <rect x="158" y="135" width="34" height="5"/>
-          <rect x="158" y="155" width="34" height="5"/>
-          <rect x="158" y="175" width="34" height="5"/>
-          <rect x="158" y="195" width="34" height="5"/>
-        </g>
-
-        <!-- الجسم -->
-        <rect x="42" y="60" width="116" height="160" rx="14"
-              fill="url(#bodyG)" stroke="#0d0d0d" stroke-width="3"/>
-        <rect x="42" y="60" width="116" height="160" rx="14"
-              fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
-        <rect x="52" y="75" width="96" height="8" fill="#3d4a2b" opacity=".8" rx="3"/>
-        <rect x="52" y="200" width="96" height="8" fill="#3d4a2b" opacity=".8" rx="3"/>
-
-        <!-- تفاصيل جانبية -->
-        <rect x="48" y="100" width="8" height="80" fill="#2a3418" rx="2"/>
-        <rect x="144" y="100" width="8" height="80" fill="#2a3418" rx="2"/>
-
-        <!-- البرج -->
-        <circle cx="100" cy="135" r="38" fill="url(#turretG)"
-                stroke="#0d0d0d" stroke-width="3"/>
-        <circle cx="100" cy="135" r="38" fill="none"
-                stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
-        <circle cx="100" cy="135" r="22" fill="#0a0a0a"/>
-        <circle cx="100" cy="135" r="22" fill="none"
-                stroke="rgba(255,123,0,.4)" stroke-width="1"/>
-        <circle cx="100" cy="135" r="10" fill="#000"/>
-
-        <!-- المدفع -->
-        <rect x="92" y="20" width="16" height="100" rx="5"
-              fill="url(#barrel)" stroke="#000" stroke-width="1.5"/>
-        <rect x="88" y="16" width="24" height="16" rx="4"
-              fill="#3d4a2b" stroke="#000" stroke-width="1.5"/>
-        <ellipse cx="100" cy="16" rx="12" ry="5" fill="#0a0a0a" filter="url(#glow)"/>
-        <ellipse cx="100" cy="16" rx="6" ry="2.5" fill="#ff7b00" opacity=".7"/>
-
-        <!-- شعار النجم -->
-        <g transform="translate(100,175)">
-          <polygon points="0,-14 4,-5 14,-5 6,1 9,11 0,5 -9,11 -6,1 -14,-5 -4,-5"
-                   fill="#ff7b00" opacity=".95" filter="url(#glow)"/>
-        </g>
-
-        <!-- لمعة -->
-        <ellipse cx="75" cy="90" rx="30" ry="60"
-                 fill="rgba(255,255,255,.08)" pointer-events="none"/>
-      </svg>
+    <div class="charWrap" id="charWrap"></div>
+    <div class="charInfo">
+      <div class="charName" id="charName">PHANTOM</div>
+      <div class="charSub" id="charSub">COMMANDO · SPECIAL FORCES</div>
+      <span class="rarity legendary" id="charRarity">LEGENDARY</span>
     </div>
   </div>
+
+  <div class="picker" id="picker"></div>
 
   <div class="sides">
     <button class="sic" data-act="shop">🛒</button>
@@ -550,16 +420,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#05070a;color:#fff;
 <script>
 (function(){
 'use strict';
-var $ = function(id){return document.getElementById(id)};
+var $=function(id){return document.getElementById(id)};
 
-/* CACHE */
-var C = {
+/* ============ CACHE ============ */
+var C={
   set:function(k,v){try{localStorage.setItem('coa_'+k,JSON.stringify(v))}catch(e){}},
   get:function(k,d){try{var r=localStorage.getItem('coa_'+k);return r?JSON.parse(r):d}catch(e){return d}},
   del:function(k){localStorage.removeItem('coa_'+k)}
 };
 
-/* AUDIO */
+/* ============ AUDIO ============ */
 var AC=null;
 function tone(f,d,t,v){try{
   if(!AC){var A=window.AudioContext||window.webkitAudioContext;if(!A)return;AC=new A()}
@@ -574,20 +444,556 @@ var S={
   click:function(){tone(800,.05,'square',.12)},
   success:function(){tone(600,.08,'triangle',.15);setTimeout(function(){tone(900,.12,'triangle',.15)},80)},
   error:function(){tone(220,.15,'sawtooth',.12)},
-  coin:function(){tone(1200,.06,'square',.12);setTimeout(function(){tone(1600,.08,'square',.12)},60)}
+  coin:function(){tone(1200,.06,'square',.12);setTimeout(function(){tone(1600,.08,'square',.12)},60)},
+  select:function(){tone(1000,.06,'triangle',.15);setTimeout(function(){tone(1400,.1,'triangle',.15)},50)}
 };
 
-/* PROFILE */
+/* ============================================================
+   CHARACTERS - 10 different characters with unique SVG
+   ============================================================ */
+function svgHeader(){
+  return '<svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">';
+}
+
+/* Character 1: PHANTOM - Legendary - Black ninja with orange visor */
+function charPhantom(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="ph_b" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#2a2a2a"/><stop offset="100%" stop-color="#0a0a0a"/></linearGradient>'
+  +'<linearGradient id="ph_s" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#3a3a3a"/><stop offset="100%" stop-color="#1a1a1a"/></linearGradient>'
+  +'<filter id="phGl"><feGaussianBlur stdDeviation="3" result="b"/>'
+  +'<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+  +'</defs>'
+  /* legs */
+  +'<rect x="72" y="190" width="22" height="70" rx="6" fill="url(#ph_s)"/>'
+  +'<rect x="106" y="190" width="22" height="70" rx="6" fill="url(#ph_s)"/>'
+  +'<rect x="68" y="250" width="30" height="14" rx="4" fill="#0a0a0a"/>'
+  +'<rect x="102" y="250" width="30" height="14" rx="4" fill="#0a0a0a"/>'
+  /* torso */
+  +'<rect x="60" y="95" width="80" height="105" rx="14" fill="url(#ph_b)"/>'
+  +'<rect x="60" y="95" width="80" height="105" rx="14" fill="none" stroke="#000" stroke-width="2"/>'
+  /* chest armor plate */
+  +'<rect x="70" y="110" width="60" height="30" rx="6" fill="#1a1a1a" stroke="#ff7b00" stroke-width="1.5"/>'
+  +'<rect x="78" y="118" width="44" height="4" fill="#ff7b00" opacity=".9"/>'
+  +'<rect x="78" y="126" width="30" height="4" fill="#ff7b00" opacity=".7"/>'
+  /* belt */
+  +'<rect x="60" y="185" width="80" height="8" fill="#0a0a0a"/>'
+  +'<rect x="92" y="183" width="16" height="12" fill="#ff7b00" filter="url(#phGl)"/>'
+  /* arms */
+  +'<rect x="40" y="100" width="22" height="80" rx="8" fill="url(#ph_s)"/>'
+  +'<rect x="138" y="100" width="22" height="80" rx="8" fill="url(#ph_s)"/>'
+  +'<circle cx="51" cy="185" r="12" fill="#0a0a0a"/>'
+  +'<circle cx="149" cy="185" r="12" fill="#0a0a0a"/>'
+  /* shoulders */
+  +'<ellipse cx="55" cy="100" rx="18" ry="12" fill="#1a1a1a" stroke="#000" stroke-width="1.5"/>'
+  +'<ellipse cx="145" cy="100" rx="18" ry="12" fill="#1a1a1a" stroke="#000" stroke-width="1.5"/>'
+  /* neck */
+  +'<rect x="90" y="82" width="20" height="18" fill="#2a2a2a"/>'
+  /* head/hood */
+  +'<ellipse cx="100" cy="60" rx="38" ry="42" fill="url(#ph_b)"/>'
+  +'<ellipse cx="100" cy="60" rx="38" ry="42" fill="none" stroke="#000" stroke-width="2"/>'
+  /* mask face area */
+  +'<ellipse cx="100" cy="65" rx="30" ry="32" fill="#0a0a0a"/>'
+  /* visor */
+  +'<path d="M 68 55 Q 100 45 132 55 L 132 70 Q 100 76 68 70 Z" fill="#ff7b00" filter="url(#phGl)" opacity=".95"/>'
+  +'<path d="M 72 58 Q 100 50 128 58" stroke="#fff" stroke-width="2" fill="none" opacity=".8"/>'
+  /* hood folds */
+  +'<path d="M 62 45 Q 100 20 138 45" stroke="#3a3a3a" stroke-width="3" fill="none"/>'
+  +'<path d="M 62 45 L 65 75" stroke="#2a2a2a" stroke-width="2"/>'
+  +'<path d="M 138 45 L 135 75" stroke="#2a2a2a" stroke-width="2"/>'
+  /* cape */
+  +'<path d="M 60 95 Q 40 180 50 240 L 150 240 Q 160 180 140 95 Z" fill="#0a0a0a" opacity=".5"/>'
+  +'</svg>';
+}
+
+/* Character 2: VALKYRIE - Epic - Female warrior with braid */
+function charValkyrie(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="vk_a" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#5a3010"/><stop offset="100%" stop-color="#2a1808"/></linearGradient>'
+  +'<linearGradient id="vk_h" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#ffcc44"/><stop offset="100%" stop-color="#aa7700"/></linearGradient>'
+  +'<filter id="vkGl"><feGaussianBlur stdDeviation="2" result="b"/>'
+  +'<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+  +'</defs>'
+  /* legs */
+  +'<path d="M 72 190 L 68 265 L 92 265 L 92 190 Z" fill="#3a2010"/>'
+  +'<path d="M 108 190 L 108 265 L 132 265 L 128 190 Z" fill="#3a2010"/>'
+  +'<rect x="62" y="255" width="34" height="14" rx="4" fill="#1a0a00"/>'
+  +'<rect x="104" y="255" width="34" height="14" rx="4" fill="#1a0a00"/>'
+  /* torso armor */
+  +'<path d="M 62 95 Q 100 85 138 95 L 130 190 L 70 190 Z" fill="url(#vk_a)"/>'
+  +'<path d="M 62 95 Q 100 85 138 95 L 130 190 L 70 190 Z" fill="none" stroke="#000" stroke-width="2"/>'
+  /* chest plate detail */
+  +'<path d="M 75 105 L 125 105 L 120 140 L 80 140 Z" fill="#7a4a20" stroke="#ffcc44" stroke-width="1.5"/>'
+  +'<circle cx="100" cy="122" r="8" fill="#ffcc44" filter="url(#vkGl)"/>'
+  +'<path d="M 82 150 L 118 150" stroke="#ffcc44" stroke-width="2"/>'
+  /* shoulders */
+  +'<ellipse cx="55" cy="100" rx="20" ry="14" fill="#5a3010" stroke="#000" stroke-width="2"/>'
+  +'<ellipse cx="145" cy="100" rx="20" ry="14" fill="#5a3010" stroke="#000" stroke-width="2"/>'
+  +'<ellipse cx="55" cy="100" rx="12" ry="8" fill="#ffcc44" opacity=".4"/>'
+  +'<ellipse cx="145" cy="100" rx="12" ry="8" fill="#ffcc44" opacity=".4"/>'
+  /* arms */
+  +'<rect x="40" y="105" width="20" height="75" rx="8" fill="#3a2010"/>'
+  +'<rect x="140" y="105" width="20" height="75" rx="8" fill="#3a2010"/>'
+  /* neck */
+  +'<rect x="92" y="80" width="16" height="18" fill="#c89868"/>'
+  /* head */
+  +'<ellipse cx="100" cy="55" rx="32" ry="38" fill="#d8a878"/>'
+  +'<ellipse cx="100" cy="55" rx="32" ry="38" fill="none" stroke="#000" stroke-width="1.5"/>'
+  /* hair */
+  +'<path d="M 68 45 Q 100 15 132 45 Q 135 65 130 90 L 125 55 Q 100 40 75 55 L 70 90 Q 65 65 68 45 Z" fill="url(#vk_h)"/>'
+  +'<path d="M 130 90 Q 145 130 140 180" stroke="#aa7700" stroke-width="10" fill="none" stroke-linecap="round"/>'
+  +'<path d="M 130 90 Q 145 130 140 180" stroke="#ffcc44" stroke-width="4" fill="none" stroke-linecap="round"/>'
+  /* eyes */
+  +'<ellipse cx="88" cy="58" rx="4" ry="5" fill="#000"/>'
+  +'<ellipse cx="112" cy="58" rx="4" ry="5" fill="#000"/>'
+  +'<circle cx="88" cy="57" r="1.5" fill="#00e5ff" filter="url(#vkGl)"/>'
+  +'<circle cx="112" cy="57" r="1.5" fill="#00e5ff" filter="url(#vkGl)"/>'
+  /* lips */
+  +'<path d="M 94 72 Q 100 76 106 72" stroke="#8a1010" stroke-width="2" fill="none"/>'
+  +'</svg>';
+}
+
+/* Character 3: RANGER - Rare - Military green with cap */
+function charRanger(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="rg_u" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#7d9556"/><stop offset="100%" stop-color="#3d4a2b"/></linearGradient>'
+  +'<linearGradient id="rg_v" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#5a6e3d"/><stop offset="100%" stop-color="#2a3418"/></linearGradient>'
+  +'</defs>'
+  /* legs */
+  +'<rect x="74" y="195" width="20" height="65" rx="5" fill="#3d4a2b"/>'
+  +'<rect x="106" y="195" width="20" height="65" rx="5" fill="#3d4a2b"/>'
+  +'<rect x="70" y="252" width="28" height="14" rx="3" fill="#1a1a1a"/>'
+  +'<rect x="102" y="252" width="28" height="14" rx="3" fill="#1a1a1a"/>'
+  /* torso */
+  +'<rect x="62" y="100" width="76" height="100" rx="10" fill="url(#rg_u)"/>'
+  +'<rect x="62" y="100" width="76" height="100" rx="10" fill="none" stroke="#1a1a1a" stroke-width="2"/>'
+  /* tactical vest */
+  +'<rect x="70" y="110" width="60" height="70" rx="6" fill="url(#rg_v)" stroke="#1a1a1a" stroke-width="1.5"/>'
+  +'<rect x="76" y="120" width="20" height="16" fill="#2a3418" stroke="#7d9556" stroke-width="1"/>'
+  +'<rect x="104" y="120" width="20" height="16" fill="#2a3418" stroke="#7d9556" stroke-width="1"/>'
+  +'<rect x="76" y="142" width="48" height="10" fill="#2a3418" stroke="#7d9556" stroke-width="1"/>'
+  +'<rect x="76" y="158" width="48" height="14" fill="#2a3418" stroke="#7d9556" stroke-width="1"/>'
+  /* arms */
+  +'<rect x="42" y="105" width="20" height="80" rx="7" fill="url(#rg_v)"/>'
+  +'<rect x="138" y="105" width="20" height="80" rx="7" fill="url(#rg_v)"/>'
+  +'<circle cx="52" cy="190" r="11" fill="#1a1a1a"/>'
+  +'<circle cx="148" cy="190" r="11" fill="#1a1a1a"/>'
+  /* shoulders */
+  +'<ellipse cx="55" cy="105" rx="16" ry="11" fill="#3d4a2b" stroke="#1a1a1a" stroke-width="1.5"/>'
+  +'<ellipse cx="145" cy="105" rx="16" ry="11" fill="#3d4a2b" stroke="#1a1a1a" stroke-width="1.5"/>'
+  /* neck */
+  +'<rect x="92" y="82" width="16" height="20" fill="#c89868"/>'
+  /* head */
+  +'<ellipse cx="100" cy="58" rx="30" ry="36" fill="#d8a878"/>'
+  +'<ellipse cx="100" cy="58" rx="30" ry="36" fill="none" stroke="#000" stroke-width="1.5"/>'
+  /* cap */
+  +'<path d="M 68 40 Q 100 8 132 40 L 132 50 L 68 50 Z" fill="#3d4a2b" stroke="#1a1a1a" stroke-width="1.5"/>'
+  +'<path d="M 130 42 L 155 46 L 155 52 L 130 50 Z" fill="#2a3418"/>'
+  +'<rect x="68" y="46" width="64" height="6" fill="#1a1a1a"/>'
+  +'<circle cx="100" cy="26" r="5" fill="#ff7b00"/>'
+  /* eyes */
+  +'<ellipse cx="88" cy="60" rx="3.5" ry="4.5" fill="#000"/>'
+  +'<ellipse cx="112" cy="60" rx="3.5" ry="4.5" fill="#000"/>'
+  /* mouth */
+  +'<path d="M 94 75 L 106 75" stroke="#5a3010" stroke-width="2" stroke-linecap="round"/>'
+  /* camo dots */
+  +'<circle cx="80" cy="180" r="4" fill="#2a3418"/>'
+  +'<circle cx="120" cy="175" r="5" fill="#2a3418"/>'
+  +'<circle cx="100" cy="188" r="3" fill="#2a3418"/>'
+  +'</svg>';
+}
+
+/* Character 4: VIPER - Legendary - Red/black assassin with snake motif */
+function charViper(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="vp_b" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#3a0a0a"/><stop offset="100%" stop-color="#0a0a0a"/></linearGradient>'
+  +'<filter id="vpGl"><feGaussianBlur stdDeviation="2.5" result="b"/>'
+  +'<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+  +'</defs>'
+  /* legs */
+  +'<rect x="72" y="190" width="22" height="70" rx="6" fill="#1a0a0a"/>'
+  +'<rect x="106" y="190" width="22" height="70" rx="6" fill="#1a0a0a"/>'
+  +'<rect x="68" y="250" width="30" height="14" rx="4" fill="#000"/>'
+  +'<rect x="102" y="250" width="30" height="14" rx="4" fill="#000"/>'
+  /* torso */
+  +'<path d="M 60 95 L 140 95 L 132 190 L 68 190 Z" fill="url(#vp_b)" stroke="#000" stroke-width="2"/>'
+  /* snake emblem */
+  +'<path d="M 75 115 Q 85 108 95 115 Q 105 122 100 135 Q 95 148 105 155 Q 115 162 125 155" '
+  +'stroke="#ff2020" stroke-width="3" fill="none" filter="url(#vpGl)"/>'
+  +'<circle cx="73" cy="115" r="3" fill="#ff2020" filter="url(#vpGl)"/>'
+  /* belt */
+  +'<rect x="60" y="180" width="80" height="8" fill="#000"/>'
+  /* shoulders - pointed */
+  +'<path d="M 40 100 L 60 88 L 62 105 L 45 115 Z" fill="#2a0a0a" stroke="#000" stroke-width="1.5"/>'
+  +'<path d="M 160 100 L 140 88 L 138 105 L 155 115 Z" fill="#2a0a0a" stroke="#000" stroke-width="1.5"/>'
+  /* arms */
+  +'<rect x="42" y="105" width="20" height="78" rx="7" fill="#1a0a0a"/>'
+  +'<rect x="138" y="105" width="20" height="78" rx="7" fill="#1a0a0a"/>'
+  +'<circle cx="52" cy="188" r="11" fill="#000"/>'
+  +'<circle cx="148" cy="188" r="11" fill="#000"/>'
+  /* neck */
+  +'<rect x="92" y="80" width="16" height="18" fill="#2a2a2a"/>'
+  /* head with hood */
+  +'<path d="M 62 55 Q 60 20 100 15 Q 140 20 138 55 L 138 80 Q 100 90 62 80 Z" fill="url(#vp_b)"/>'
+  +'<path d="M 62 55 Q 60 20 100 15 Q 140 20 138 55 L 138 80 Q 100 90 62 80 Z" fill="none" stroke="#000" stroke-width="2"/>'
+  /* face slit */
+  +'<path d="M 70 60 Q 100 55 130 60 L 130 72 Q 100 78 70 72 Z" fill="#0a0a0a"/>'
+  /* glowing red eyes */
+  +'<ellipse cx="85" cy="66" rx="4" ry="3" fill="#ff2020" filter="url(#vpGl)"/>'
+  +'<ellipse cx="115" cy="66" rx="4" ry="3" fill="#ff2020" filter="url(#vpGl)"/>'
+  +'<ellipse cx="85" cy="66" rx="1.5" ry="1" fill="#fff"/>'
+  +'<ellipse cx="115" cy="66" rx="1.5" ry="1" fill="#fff"/>'
+  /* hood folds */
+  +'<path d="M 70 35 Q 100 25 130 35" stroke="#4a1010" stroke-width="2" fill="none"/>'
+  +'</svg>';
+}
+
+/* Character 5: TITAN - Rare - Heavy armored soldier */
+function charTitan(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="tt_b" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#4a4a4a"/><stop offset="100%" stop-color="#1a1a1a"/></linearGradient>'
+  +'<linearGradient id="tt_m" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#6a6a6a"/><stop offset="100%" stop-color="#2a2a2a"/></linearGradient>'
+  +'</defs>'
+  /* big legs */
+  +'<rect x="66" y="185" width="28" height="80" rx="6" fill="#2a2a2a"/>'
+  +'<rect x="106" y="185" width="28" height="80" rx="6" fill="#2a2a2a"/>'
+  +'<rect x="60" y="255" width="40" height="16" rx="4" fill="#0a0a0a"/>'
+  +'<rect x="100" y="255" width="40" height="16" rx="4" fill="#0a0a0a"/>'
+  /* big torso */
+  +'<rect x="52" y="90" width="96" height="110" rx="14" fill="url(#tt_b)" stroke="#000" stroke-width="2"/>'
+  /* armor plates */
+  +'<rect x="62" y="100" width="76" height="35" rx="6" fill="url(#tt_m)" stroke="#000" stroke-width="1.5"/>'
+  +'<rect x="62" y="140" width="76" height="25" rx="6" fill="url(#tt_m)" stroke="#000" stroke-width="1.5"/>'
+  +'<rect x="62" y="170" width="76" height="20" rx="6" fill="url(#tt_m)" stroke="#000" stroke-width="1.5"/>'
+  +'<line x1="100" y1="100" x2="100" y2="185" stroke="#0a0a0a" stroke-width="2"/>'
+  /* shoulder armor - big */
+  +'<path d="M 35 95 Q 30 75 55 75 L 70 85 L 70 115 L 40 115 Z" fill="#3a3a3a" stroke="#000" stroke-width="2"/>'
+  +'<path d="M 165 95 Q 170 75 145 75 L 130 85 L 130 115 L 160 115 Z" fill="#3a3a3a" stroke="#000" stroke-width="2"/>'
+  +'<circle cx="52" cy="95" r="4" fill="#ff7b00"/>'
+  +'<circle cx="148" cy="95" r="4" fill="#ff7b00"/>'
+  /* big arms */
+  +'<rect x="30" y="105" width="24" height="80" rx="8" fill="#2a2a2a"/>'
+  +'<rect x="146" y="105" width="24" height="80" rx="8" fill="#2a2a2a"/>'
+  +'<rect x="26" y="180" width="32" height="24" rx="6" fill="#0a0a0a"/>'
+  +'<rect x="142" y="180" width="32" height="24" rx="6" fill="#0a0a0a"/>'
+  /* neck */
+  +'<rect x="88" y="75" width="24" height="20" fill="#2a2a2a"/>'
+  /* helmet */
+  +'<path d="M 68 35 Q 100 8 132 35 L 132 75 Q 100 85 68 75 Z" fill="#3a3a3a" stroke="#000" stroke-width="2"/>'
+  +'<rect x="72" y="55" width="56" height="16" rx="4" fill="#0a0a0a"/>'
+  +'<rect x="72" y="55" width="56" height="16" rx="4" fill="none" stroke="#ff7b00" stroke-width="1"/>'
+  /* visor glow */
+  +'<rect x="76" y="58" width="48" height="10" rx="3" fill="#00e5ff" opacity=".7"/>'
+  +'<rect x="76" y="58" width="48" height="3" rx="2" fill="#aaffff"/>'
+  /* helmet vents */
+  +'<line x1="100" y1="20" x2="100" y2="35" stroke="#1a1a1a" stroke-width="2"/>'
+  +'<line x1="85" y1="22" x2="85" y2="35" stroke="#1a1a1a" stroke-width="1.5"/>'
+  +'<line x1="115" y1="22" x2="115" y2="35" stroke="#1a1a1a" stroke-width="1.5"/>'
+  +'</svg>';
+}
+
+/* Character 6: BLAZE - Epic - Orange/black fire soldier */
+function charBlaze(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="bz_b" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#3a1a00"/><stop offset="100%" stop-color="#0a0500"/></linearGradient>'
+  +'<filter id="bzGl"><feGaussianBlur stdDeviation="3" result="b"/>'
+  +'<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+  +'</defs>'
+  /* legs */
+  +'<rect x="72" y="195" width="22" height="65" rx="5" fill="#1a0a00"/>'
+  +'<rect x="106" y="195" width="22" height="65" rx="5" fill="#1a0a00"/>'
+  +'<rect x="68" y="252" width="30" height="14" rx="4" fill="#0a0500"/>'
+  +'<rect x="102" y="252" width="30" height="14" rx="4" fill="#0a0500"/>'
+  /* torso */
+  +'<rect x="60" y="95" width="80" height="105" rx="12" fill="url(#bz_b)" stroke="#000" stroke-width="2"/>'
+  /* flame emblem */
+  +'<path d="M 100 110 Q 92 125 95 135 Q 88 128 85 140 Q 92 155 100 155 Q 108 155 115 140 Q 112 128 105 135 Q 108 125 100 110 Z" '
+  +'fill="#ff7b00" filter="url(#bzGl)"/>'
+  +'<path d="M 100 118 Q 96 128 98 135 Q 100 130 102 135 Q 104 128 100 118 Z" fill="#ffd54f"/>'
+  /* belt */
+  +'<rect x="60" y="185" width="80" height="8" fill="#0a0500"/>'
+  +'<rect x="92" y="183" width="16" height="12" fill="#ff7b00" filter="url(#bzGl)"/>'
+  /* shoulders */
+  +'<ellipse cx="55" cy="100" rx="18" ry="12" fill="#2a1000" stroke="#000" stroke-width="1.5"/>'
+  +'<ellipse cx="145" cy="100" rx="18" ry="12" fill="#2a1000" stroke="#000" stroke-width="1.5"/>'
+  +'<ellipse cx="55" cy="100" rx="10" ry="6" fill="#ff7b00" opacity=".5"/>'
+  +'<ellipse cx="145" cy="100" rx="10" ry="6" fill="#ff7b00" opacity=".5"/>'
+  /* arms */
+  +'<rect x="42" y="105" width="20" height="80" rx="7" fill="#1a0a00"/>'
+  +'<rect x="138" y="105" width="20" height="80" rx="7" fill="#1a0a00"/>'
+  /* gloves glow */
+  +'<circle cx="52" cy="188" r="11" fill="#0a0500" stroke="#ff7b00" stroke-width="1.5"/>'
+  +'<circle cx="148" cy="188" r="11" fill="#0a0500" stroke="#ff7b00" stroke-width="1.5"/>'
+  /* neck */
+  +'<rect x="92" y="80" width="16" height="18" fill="#c89868"/>'
+  /* head with helmet */
+  +'<ellipse cx="100" cy="58" rx="30" ry="36" fill="#d8a878"/>'
+  /* helmet top */
+  +'<path d="M 68 42 Q 100 15 132 42 L 132 55 Q 100 48 68 55 Z" fill="#2a1000" stroke="#000" stroke-width="1.5"/>'
+  /* goggles */
+  +'<path d="M 68 52 Q 100 45 132 52 L 132 68 Q 100 74 68 68 Z" fill="#0a0500" stroke="#ff7b00" stroke-width="1.5"/>'
+  +'<circle cx="85" cy="60" r="7" fill="#1a1a1a" stroke="#ffb347" stroke-width="1"/>'
+  +'<circle cx="115" cy="60" r="7" fill="#1a1a1a" stroke="#ffb347" stroke-width="1"/>'
+  +'<circle cx="85" cy="60" r="3" fill="#ff7b00" filter="url(#bzGl)"/>'
+  +'<circle cx="115" cy="60" r="3" fill="#ff7b00" filter="url(#bzGl)"/>'
+  /* mouth mask */
+  +'<rect x="78" y="72" width="44" height="14" rx="4" fill="#0a0500" stroke="#000" stroke-width="1"/>'
+  /* straps */
+  +'<line x1="72" y1="60" x2="128" y2="60" stroke="#1a0a00" stroke-width="1"/>'
+  +'</svg>';
+}
+
+/* Character 7: GHOST - Epic - White/grey sniper */
+function charGhost(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="gh_b" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#e0e0e0"/><stop offset="100%" stop-color="#808080"/></linearGradient>'
+  +'<linearGradient id="gh_d" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#c0c0c0"/><stop offset="100%" stop-color="#5a5a5a"/></linearGradient>'
+  +'</defs>'
+  /* legs */
+  +'<rect x="74" y="195" width="20" height="65" rx="5" fill="#808080"/>'
+  +'<rect x="106" y="195" width="20" height="65" rx="5" fill="#808080"/>'
+  +'<rect x="70" y="252" width="28" height="14" rx="4" fill="#3a3a3a"/>'
+  +'<rect x="102" y="252" width="28" height="14" rx="4" fill="#3a3a3a"/>'
+  /* torso */
+  +'<rect x="62" y="95" width="76" height="105" rx="12" fill="url(#gh_b)" stroke="#2a2a2a" stroke-width="2"/>'
+  /* sniper vest */
+  +'<rect x="72" y="110" width="56" height="70" rx="6" fill="url(#gh_d)" stroke="#2a2a2a" stroke-width="1.5"/>'
+  +'<rect x="78" y="118" width="20" height="18" fill="#4a4a4a" stroke="#2a2a2a" stroke-width="1"/>'
+  +'<rect x="102" y="118" width="20" height="18" fill="#4a4a4a" stroke="#2a2a2a" stroke-width="1"/>'
+  +'<rect x="78" y="142" width="44" height="20" fill="#4a4a4a" stroke="#2a2a2a" stroke-width="1"/>'
+  /* crosshair emblem */
+  +'<circle cx="100" cy="152" r="7" fill="none" stroke="#ff2020" stroke-width="1.5"/>'
+  +'<line x1="100" y1="145" x2="100" y2="159" stroke="#ff2020" stroke-width="1"/>'
+  +'<line x1="93" y1="152" x2="107" y2="152" stroke="#ff2020" stroke-width="1"/>'
+  /* arms */
+  +'<rect x="42" y="105" width="20" height="80" rx="7" fill="url(#gh_d)"/>'
+  +'<rect x="138" y="105" width="20" height="80" rx="7" fill="url(#gh_d)"/>'
+  +'<circle cx="52" cy="190" r="11" fill="#3a3a3a"/>'
+  +'<circle cx="148" cy="190" r="11" fill="#3a3a3a"/>'
+  /* shoulders */
+  +'<ellipse cx="55" cy="105" rx="16" ry="11" fill="#a0a0a0" stroke="#2a2a2a" stroke-width="1.5"/>'
+  +'<ellipse cx="145" cy="105" rx="16" ry="11" fill="#a0a0a0" stroke="#2a2a2a" stroke-width="1.5"/>'
+  /* neck */
+  +'<rect x="92" y="80" width="16" height="20" fill="#c89868"/>'
+  /* head + balaclava */
+  +'<ellipse cx="100" cy="55" rx="30" ry="36" fill="#e0e0e0"/>'
+  +'<ellipse cx="100" cy="55" rx="30" ry="36" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>'
+  /* eye area cutout */
+  +'<path d="M 72 50 Q 100 42 128 50 L 128 65 Q 100 70 72 65 Z" fill="#3a3a3a"/>'
+  /* eyes */
+  +'<ellipse cx="86" cy="58" rx="4" ry="5" fill="#fff"/>'
+  +'<ellipse cx="114" cy="58" rx="4" ry="5" fill="#fff"/>'
+  +'<circle cx="86" cy="58" r="2.5" fill="#00e5ff"/>'
+  +'<circle cx="114" cy="58" r="2.5" fill="#00e5ff"/>'
+  +'<circle cx="86" cy="58" r="1" fill="#000"/>'
+  +'<circle cx="114" cy="58" r="1" fill="#000"/>'
+  /* headset */
+  +'<path d="M 68 40 Q 100 15 132 40" stroke="#2a2a2a" stroke-width="4" fill="none"/>'
+  +'<ellipse cx="68" cy="55" rx="6" ry="10" fill="#1a1a1a"/>'
+  +'<ellipse cx="132" cy="55" rx="6" ry="10" fill="#1a1a1a"/>'
+  +'</svg>';
+}
+
+/* Character 8: INFERNO - Legendary - Fire demon with horns */
+function charInferno(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="if_b" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#8a1010"/><stop offset="100%" stop-color="#1a0000"/></linearGradient>'
+  +'<filter id="ifGl"><feGaussianBlur stdDeviation="4" result="b"/>'
+  +'<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+  +'</defs>'
+  /* legs */
+  +'<rect x="72" y="195" width="22" height="65" rx="6" fill="#1a0000"/>'
+  +'<rect x="106" y="195" width="22" height="65" rx="6" fill="#1a0000"/>'
+  +'<rect x="68" y="252" width="30" height="14" rx="4" fill="#000"/>'
+  +'<rect x="102" y="252" width="30" height="14" rx="4" fill="#000"/>'
+  /* torso */
+  +'<rect x="60" y="95" width="80" height="105" rx="12" fill="url(#if_b)" stroke="#000" stroke-width="2"/>'
+  /* burning core */
+  +'<circle cx="100" cy="145" r="14" fill="#ff7b00" filter="url(#ifGl)"/>'
+  +'<circle cx="100" cy="145" r="8" fill="#ffd54f"/>'
+  +'<circle cx="100" cy="145" r="4" fill="#fff"/>'
+  /* cracked lines */
+  +'<path d="M 100 130 L 95 140 L 105 150 L 100 165" stroke="#ff7b00" stroke-width="2" fill="none" filter="url(#ifGl)"/>'
+  /* shoulders with spikes */
+  +'<path d="M 40 105 L 55 90 L 62 100 L 68 88 L 74 105 L 74 115 L 40 115 Z" fill="#3a0808" stroke="#000" stroke-width="1.5"/>'
+  +'<path d="M 160 105 L 145 90 L 138 100 L 132 88 L 126 105 L 126 115 L 160 115 Z" fill="#3a0808" stroke="#000" stroke-width="1.5"/>'
+  /* arms */
+  +'<rect x="40" y="105" width="22" height="80" rx="7" fill="#1a0000"/>'
+  +'<rect x="138" y="105" width="22" height="80" rx="7" fill="#1a0000"/>'
+  /* clawed hands */
+  +'<circle cx="51" cy="190" r="12" fill="#0a0000"/>'
+  +'<circle cx="149" cy="190" r="12" fill="#0a0000"/>'
+  +'<path d="M 42 195 L 38 205 M 45 197 L 43 208 M 48 198 L 47 209" stroke="#8a1010" stroke-width="2"/>'
+  +'<path d="M 158 195 L 162 205 M 155 197 L 157 208 M 152 198 L 153 209" stroke="#8a1010" stroke-width="2"/>'
+  /* head with demon features */
+  +'<ellipse cx="100" cy="58" rx="32" ry="36" fill="#8a1010"/>'
+  +'<ellipse cx="100" cy="58" rx="32" ry="36" fill="none" stroke="#000" stroke-width="2"/>'
+  /* horns */
+  +'<path d="M 72 35 Q 60 10 45 15 Q 55 25 65 40 Z" fill="#3a0808" stroke="#000" stroke-width="1.5"/>'
+  +'<path d="M 128 35 Q 140 10 155 15 Q 145 25 135 40 Z" fill="#3a0808" stroke="#000" stroke-width="1.5"/>'
+  +'<path d="M 70 32 Q 58 15 50 18" stroke="#6a1010" stroke-width="1.5" fill="none"/>'
+  +'<path d="M 130 32 Q 142 15 150 18" stroke="#6a1010" stroke-width="1.5" fill="none"/>'
+  /* glowing eyes */
+  +'<ellipse cx="85" cy="58" rx="7" ry="5" fill="#ff7b00" filter="url(#ifGl)"/>'
+  +'<ellipse cx="115" cy="58" rx="7" ry="5" fill="#ff7b00" filter="url(#ifGl)"/>'
+  +'<ellipse cx="85" cy="58" rx="3" ry="2.5" fill="#ffd54f"/>'
+  +'<ellipse cx="115" cy="58" rx="3" ry="2.5" fill="#ffd54f"/>'
+  +'<ellipse cx="85" cy="58" rx="1.2" ry="1" fill="#fff"/>'
+  +'<ellipse cx="115" cy="58" rx="1.2" ry="1" fill="#fff"/>'
+  /* mouth with fangs */
+  +'<path d="M 84 78 Q 100 84 116 78" stroke="#000" stroke-width="2" fill="none"/>'
+  +'<path d="M 88 78 L 90 82 L 92 78" fill="#fff"/>'
+  +'<path d="M 96 80 L 98 84 L 100 80" fill="#fff"/>'
+  +'<path d="M 104 80 L 106 84 L 108 80" fill="#fff"/>'
+  +'<path d="M 112 78 L 114 82 L 116 78" fill="#fff"/>'
+  +'</svg>';
+}
+
+/* Character 9: STEEL - Common - Basic soldier */
+function charSteel(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="st_b" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#6a6a6a"/><stop offset="100%" stop-color="#2a2a2a"/></linearGradient>'
+  +'</defs>'
+  /* legs */
+  +'<rect x="74" y="195" width="20" height="65" rx="5" fill="#4a4a4a"/>'
+  +'<rect x="106" y="195" width="20" height="65" rx="5" fill="#4a4a4a"/>'
+  +'<rect x="70" y="252" width="28" height="14" rx="4" fill="#2a2a2a"/>'
+  +'<rect x="102" y="252" width="28" height="14" rx="4" fill="#2a2a2a"/>'
+  /* torso */
+  +'<rect x="62" y="100" width="76" height="100" rx="10" fill="url(#st_b)" stroke="#1a1a1a" stroke-width="2"/>'
+  +'<rect x="72" y="112" width="56" height="50" rx="4" fill="#3a3a3a" stroke="#1a1a1a" stroke-width="1"/>'
+  +'<line x1="100" y1="112" x2="100" y2="162" stroke="#1a1a1a" stroke-width="1.5"/>'
+  /* arms */
+  +'<rect x="42" y="105" width="20" height="78" rx="7" fill="#4a4a4a"/>'
+  +'<rect x="138" y="105" width="20" height="78" rx="7" fill="#4a4a4a"/>'
+  +'<circle cx="52" cy="188" r="11" fill="#2a2a2a"/>'
+  +'<circle cx="148" cy="188" r="11" fill="#2a2a2a"/>'
+  /* shoulders */
+  +'<ellipse cx="55" cy="105" rx="15" ry="10" fill="#5a5a5a" stroke="#1a1a1a" stroke-width="1.5"/>'
+  +'<ellipse cx="145" cy="105" rx="15" ry="10" fill="#5a5a5a" stroke="#1a1a1a" stroke-width="1.5"/>'
+  /* neck */
+  +'<rect x="92" y="82" width="16" height="20" fill="#c89868"/>'
+  /* head */
+  +'<ellipse cx="100" cy="58" rx="30" ry="36" fill="#d8a878"/>'
+  /* helmet */
+  +'<path d="M 68 45 Q 100 20 132 45 L 132 55 L 68 55 Z" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1.5"/>'
+  +'<rect x="68" y="53" width="64" height="5" fill="#2a2a2a"/>'
+  /* eyes */
+  +'<ellipse cx="88" cy="62" rx="3" ry="4" fill="#000"/>'
+  +'<ellipse cx="112" cy="62" rx="3" ry="4" fill="#000"/>'
+  /* mouth */
+  +'<path d="M 94 76 L 106 76" stroke="#5a3010" stroke-width="2" stroke-linecap="round"/>'
+  +'</svg>';
+}
+
+/* Character 10: NOVA - Legendary - Cyan/white futuristic */
+function charNova(){
+  return svgHeader()
+  +'<defs>'
+  +'<linearGradient id="nv_b" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#e8f4ff"/><stop offset="100%" stop-color="#4a8ac0"/></linearGradient>'
+  +'<linearGradient id="nv_a" x1="0" y1="0" x2="0" y2="1">'
+  +'<stop offset="0%" stop-color="#8ac8ff"/><stop offset="100%" stop-color="#2a5a90"/></linearGradient>'
+  +'<filter id="nvGl"><feGaussianBlur stdDeviation="3" result="b"/>'
+  +'<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+  +'</defs>'
+  /* legs */
+  +'<rect x="74" y="195" width="20" height="65" rx="5" fill="#4a8ac0"/>'
+  +'<rect x="106" y="195" width="20" height="65" rx="5" fill="#4a8ac0"/>'
+  +'<rect x="70" y="252" width="28" height="14" rx="4" fill="#2a5a90" stroke="#00e5ff" stroke-width="1"/>'
+  +'<rect x="102" y="252" width="28" height="14" rx="4" fill="#2a5a90" stroke="#00e5ff" stroke-width="1"/>'
+  /* torso */
+  +'<rect x="60" y="95" width="80" height="105" rx="14" fill="url(#nv_b)" stroke="#00e5ff" stroke-width="1.5"/>'
+  /* chest core */
+  +'<circle cx="100" cy="140" r="18" fill="#2a5a90" stroke="#00e5ff" stroke-width="1.5"/>'
+  +'<circle cx="100" cy="140" r="10" fill="#00e5ff" filter="url(#nvGl)"/>'
+  +'<circle cx="100" cy="140" r="5" fill="#fff"/>'
+  /* circuit lines */
+  +'<path d="M 75 110 L 90 110 L 90 125 L 100 125" stroke="#00e5ff" stroke-width="1.5" fill="none"/>'
+  +'<path d="M 125 110 L 110 110 L 110 125 L 100 125" stroke="#00e5ff" stroke-width="1.5" fill="none"/>'
+  +'<path d="M 75 180 L 90 180 L 90 165 L 100 165" stroke="#00e5ff" stroke-width="1.5" fill="none"/>'
+  +'<path d="M 125 180 L 110 180 L 110 165 L 100 165" stroke="#00e5ff" stroke-width="1.5" fill="none"/>'
+  /* shoulders */
+  +'<ellipse cx="55" cy="102" rx="18" ry="12" fill="url(#nv_a)" stroke="#00e5ff" stroke-width="1.5"/>'
+  +'<ellipse cx="145" cy="102" rx="18" ry="12" fill="url(#nv_a)" stroke="#00e5ff" stroke-width="1.5"/>'
+  +'<ellipse cx="55" cy="102" rx="8" ry="5" fill="#00e5ff" filter="url(#nvGl)"/>'
+  +'<ellipse cx="145" cy="102" rx="8" ry="5" fill="#00e5ff" filter="url(#nvGl)"/>'
+  /* arms */
+  +'<rect x="42" y="105" width="20" height="80" rx="7" fill="url(#nv_a)"/>'
+  +'<rect x="138" y="105" width="20" height="80" rx="7" fill="url(#nv_a)"/>'
+  +'<rect x="46" y="130" width="12" height="3" fill="#00e5ff"/>'
+  +'<rect x="142" y="130" width="12" height="3" fill="#00e5ff"/>'
+  +'<rect x="46" y="150" width="12" height="3" fill="#00e5ff"/>'
+  +'<rect x="142" y="150" width="12" height="3" fill="#00e5ff"/>'
+  +'<circle cx="52" cy="190" r="11" fill="#2a5a90" stroke="#00e5ff" stroke-width="1.5"/>'
+  +'<circle cx="148" cy="190" r="11" fill="#2a5a90" stroke="#00e5ff" stroke-width="1.5"/>'
+  /* neck */
+  +'<rect x="92" y="78" width="16" height="20" fill="#3a6a9a"/>'
+  /* head + futuristic helmet */
+  +'<ellipse cx="100" cy="55" rx="32" ry="38" fill="url(#nv_b)" stroke="#00e5ff" stroke-width="1.5"/>'
+  /* visor */
+  +'<path d="M 68 52 Q 100 42 132 52 L 132 72 Q 100 80 68 72 Z" fill="#0a1a2a" stroke="#00e5ff" stroke-width="1.5"/>'
+  /* HUD lines on visor */
+  +'<line x1="76" y1="60" x2="92" y2="60" stroke="#00e5ff" stroke-width="1" opacity=".8"/>'
+  +'<line x1="108" y1="60" x2="124" y2="60" stroke="#00e5ff" stroke-width="1" opacity=".8"/>'
+  +'<line x1="76" y1="65" x2="88" y2="65" stroke="#00e5ff" stroke-width="0.8" opacity=".6"/>'
+  +'<line x1="112" y1="65" x2="124" y2="65" stroke="#00e5ff" stroke-width="0.8" opacity=".6"/>'
+  /* glowing eyes */
+  +'<circle cx="86" cy="62" r="3" fill="#00e5ff" filter="url(#nvGl)"/>'
+  +'<circle cx="114" cy="62" r="3" fill="#00e5ff" filter="url(#nvGl)"/>'
+  /* helmet details */
+  +'<path d="M 100 20 L 100 35" stroke="#00e5ff" stroke-width="2"/>'
+  +'<circle cx="100" cy="18" r="3" fill="#00e5ff" filter="url(#nvGl)"/>'
+  +'</svg>';
+}
+
+/* ============ CHARACTER DATA ============ */
+var CHARACTERS=[
+  {id:'phantom', name:'PHANTOM', sub:'COMMANDO · SPECIAL FORCES', rarity:'legendary', svg:charPhantom},
+  {id:'valkyrie',name:'VALKYRIE',sub:'WARRIOR · SHIELD MAIDEN',    rarity:'epic',     svg:charValkyrie},
+  {id:'nova',    name:'NOVA',    sub:'CYBER · ELITE UNIT',          rarity:'legendary',svg:charNova},
+  {id:'viper',   name:'VIPER',   sub:'ASSASSIN · POISON BLADE',     rarity:'legendary',svg:charViper},
+  {id:'inferno', name:'INFERNO', sub:'DEMON · FIRE LORD',           rarity:'legendary',svg:charInferno},
+  {id:'titan',   name:'TITAN',   sub:'HEAVY · ARMORED UNIT',        rarity:'rare',     svg:charTitan},
+  {id:'blaze',   name:'BLAZE',   sub:'PYRO · FIRE TROOPER',         rarity:'epic',     svg:charBlaze},
+  {id:'ghost',   name:'GHOST',   sub:'SNIPER · SHADOW UNIT',        rarity:'epic',     svg:charGhost},
+  {id:'ranger',  name:'RANGER',  sub:'SCOUT · JUNGLE OPS',          rarity:'rare',     svg:charRanger},
+  {id:'steel',   name:'STEEL',   sub:'SOLDIER · BASIC UNIT',        rarity:'common',   svg:charSteel}
+];
+
+/* ============ PROFILE ============ */
 function getP(){return C.get('profile',null)}
 function saveP(p){C.set('profile',p)}
-function newP(name,av,m){
-  var p={id:'p_'+Date.now(),username:name,avatar:av||'C',method:m||'guest',
+function newP(name,ch,m){
+  var p={id:'p_'+Date.now(),username:name,char:ch||'phantom',method:m||'guest',
     level:1,xp:0,xpMax:1000,gold:1500,gems:25,wins:0,kills:0,matches:0,
-    createdAt:Date.now()};
+    unlocked:['phantom','steel','ranger','valkyrie'],createdAt:Date.now()};
   saveP(p);return p;
 }
 
-/* TOAST */
+/* ============ TOAST ============ */
 var tT=null;
 function toast(msg,d){
   var t=$('toast');t.textContent=msg;t.classList.add('show');
@@ -595,7 +1001,7 @@ function toast(msg,d){
 }
 window.toast=toast;
 
-/* MODAL */
+/* ============ MODAL ============ */
 function openModal(t,h){
   $('boxT').textContent=t;$('boxB').innerHTML=h;$('ov').classList.add('show');
 }
@@ -603,10 +1009,10 @@ function closeModal(){$('ov').classList.remove('show')}
 window.closeModal=closeModal;
 $('ov').onclick=function(e){if(e.target===this)closeModal()};
 
-/* SPLASH */
+/* ============ SPLASH ============ */
 function splash(){
   var fill=$('fill'),pct=$('pct'),tip=$('tip');
-  var tips=['جاري تجهيز المدرعة...','تحميل الأسلحة...','محاكاة المعركة...','الاتصال بالخادم...','جاهز للقتال!'];
+  var tips=['جاري تجهيز المدرعة...','تحميل الأسلحة...','محاكاة المعركة...','تحميل الشخصيات...','جاهز للقتال!'];
   var ti=0,prog=0;
   var ti2=setInterval(function(){ti=(ti+1)%tips.length;tip.textContent=tips[ti]},900);
   var t=setInterval(function(){
@@ -621,15 +1027,14 @@ function after(){
   if(p&&p.id){lobby(p)}else{showLogin()}
 }
 
-/* AUTH */
-var selAv='C';
+/* ============ AUTH ============ */
 function showLogin(){
-  var w=$('authWrap');
+  var w=$('aw');
   w.innerHTML=''
-    +'<div class="auth-logo">CLASH OF<br>ARMORED</div>'
-    +'<div class="auth-tag">SURVIVE · FIGHT · WIN</div>'
+    +'<div class="aLogo">CLASH OF<br>ARMORED</div>'
+    +'<div class="aTag">SURVIVE · FIGHT · WIN</div>'
     +'<div class="card">'
-    +'<div class="card-title">👤 تسجيل الدخول</div>'
+    +'<div class="cT">👤 تسجيل الدخول</div>'
     +'<div class="err" id="err"></div>'
     +'<div class="fg"><label>اسم المستخدم</label>'
     +'<input type="text" class="inp" id="inU" placeholder="Commander" maxlength="20"></div>'
@@ -644,41 +1049,26 @@ function showLogin(){
   $('goR').onclick=showReg;
 }
 function showReg(){
-  var avs=['A','B','C','D','E','F','G','H','J','K','L','M'];
-  var h='';
-  for(var i=0;i<avs.length;i++){
-    h+='<div class="av'+(i===2?' sel':'')+'" data-av="'+avs[i]+'">'+avs[i]+'</div>';
-  }
-  var w=$('authWrap');
+  var w=$('aw');
   w.innerHTML=''
-    +'<div class="auth-logo">CLASH OF<br>ARMORED</div>'
-    +'<div class="auth-tag">CREATE YOUR LEGEND</div>'
+    +'<div class="aLogo">CLASH OF<br>ARMORED</div>'
+    +'<div class="aTag">CREATE YOUR LEGEND</div>'
     +'<div class="card">'
-    +'<div class="card-title">✚ حساب جديد</div>'
+    +'<div class="cT">✚ حساب جديد</div>'
     +'<div class="err" id="err"></div>'
     +'<div class="fg"><label>اسم المستخدم</label>'
     +'<input type="text" class="inp" id="rU" placeholder="Commander" maxlength="20"></div>'
-    +'<div style="font-size:11px;color:#ffb347;font-weight:700;letter-spacing:1.5px;margin-bottom:6px">اختر صورتك</div>'
-    +'<div class="avs" id="avs">'+h+'</div>'
     +'<button class="btn bp" id="btnR">✚ إنشاء الحساب</button>'
     +'<div class="sw">لديك حساب؟ <a id="goL">تسجيل الدخول</a></div>'
     +'</div>';
   $('auth').classList.add('show');
-  selAv='C';
-  var els=document.querySelectorAll('#avs .av');
-  for(var j=0;j<els.length;j++){(function(el){
-    el.onclick=function(){
-      for(var k=0;k<els.length;k++)els[k].classList.remove('sel');
-      el.classList.add('sel');selAv=el.getAttribute('data-av');S.click();
-    };
-  })(els[j])}
   $('btnR').onclick=dReg;$('goL').onclick=showLogin;
 }
 function err(m){var e=$('err');if(e){e.textContent=m;e.classList.add('show')}S.error()}
 function dReg(){
   var n=($('rU').value||'').trim();
   if(n.length<2)return err('الاسم قصير جداً');
-  var p=newP(n,selAv,'email');S.success();lobby(p);
+  var p=newP(n,'phantom','email');S.success();lobby(p);
 }
 function dLogin(){
   var n=($('inU').value||'').trim();var p=getP();
@@ -688,31 +1078,88 @@ function dLogin(){
 }
 function dGoogle(){
   var p=getP();
-  if(!p)p=newP('GoogleUser'+Math.floor(Math.random()*9000+1000),'G','google');
+  if(!p)p=newP('GoogleUser'+Math.floor(Math.random()*9000+1000),'phantom','google');
   S.success();lobby(p);
 }
 function dGuest(){
   var p=getP();
-  if(!p)p=newP('Guest'+Math.floor(Math.random()*9000+1000),'★','guest');
+  if(!p)p=newP('Guest'+Math.floor(Math.random()*9000+1000),'steel','guest');
   S.success();lobby(p);
 }
 
-/* LOBBY */
-var cur=null;
+/* ============ LOBBY ============ */
+var cur=null,curCharIdx=0;
 function lobby(p){
   cur=p;
+  if(!cur.unlocked)cur.unlocked=['phantom','steel','ranger','valkyrie'];
   $('auth').classList.remove('show');
   $('lobby').classList.add('show');
-  hud(p);parts();bind();
+  hud(p);
+  // find current character index
+  curCharIdx=0;
+  for(var i=0;i<CHARACTERS.length;i++)if(CHARACTERS[i].id===cur.char){curCharIdx=i;break}
+  showChar(curCharIdx);
+  buildPicker();
+  parts();
+  bind();
 }
 function hud(p){
   if(!p)return;
   $('pname').textContent=p.username;
-  $('pav').textContent=p.avatar||'C';
+  var avHTML='';
+  for(var i=0;i<CHARACTERS.length;i++){
+    if(CHARACTERS[i].id===p.char){avHTML=CHARACTERS[i].svg();break}
+  }
+  $('pav').innerHTML=avHTML||'';
   $('plvl').textContent=p.level;
   $('pxp').style.width=((p.xp/p.xpMax)*100)+'%';
   $('pgold').textContent=p.gold.toLocaleString();
   $('pgems').textContent=p.gems;
+}
+function showChar(idx){
+  var c=CHARACTERS[idx];
+  if(!c)return;
+  $('charWrap').innerHTML=c.svg();
+  $('charName').textContent=c.name;
+  $('charSub').textContent=c.sub;
+  var r=$('charRarity');
+  r.className='rarity '+c.rarity;
+  r.textContent=c.rarity.toUpperCase();
+  // update selection in picker
+  var picks=document.querySelectorAll('.pick');
+  for(var i=0;i<picks.length;i++)picks[i].classList.remove('sel');
+  if(picks[idx])picks[idx].classList.add('sel');
+  // save
+  if(cur){cur.char=c.id;saveP(cur);hud(cur)}
+}
+function buildPicker(){
+  var h='';
+  for(var i=0;i<CHARACTERS.length;i++){
+    var c=CHARACTERS[i];
+    var locked=cur.unlocked.indexOf(c.id)===-1;
+    h+='<div class="pick'+(i===curCharIdx?' sel':'')+'" data-i="'+i+'">'
+      +'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;'
+      +(locked?'filter:grayscale(1);opacity:.4;':'')+'">'+c.svg()+'</div>'
+      +(locked?'<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;'
+        +'background:rgba(0,0,0,.6);border-radius:12px;font-size:20px">🔒</div>':'')
+      +'</div>';
+  }
+  $('picker').innerHTML=h;
+  var els=document.querySelectorAll('.pick');
+  for(var j=0;j<els.length;j++){(function(el,i){
+    el.onclick=function(){
+      var c=CHARACTERS[i];
+      var locked=cur.unlocked.indexOf(c.id)===-1;
+      if(locked){
+        S.error();
+        toast('🔒 '+c.name+' مقفلة — تفتح في المستوى '+(i*3+2));
+        return;
+      }
+      S.select();
+      curCharIdx=i;
+      showChar(i);
+    };
+  })(els[j],j)}
 }
 function parts(){
   var box=$('parts');if(box.dataset.on)return;box.dataset.on='1';
@@ -745,25 +1192,24 @@ function bind(){
 function act(a){
   if(a==='settings')return openModal('الإعدادات',
     '<div class="r"><span>🔊 الصوت</span><span>70%</span></div>'
-    +'<div class="r"><span>🎮 الحساسية</span><span>5</span></div>'
-    +'<div class="r"><span>📳 الاهتزاز</span><span style="color:#7dff56">مفعّل</span></div>');
+    +'<div class="r"><span>🎮 الحساسية</span><span>5</span></div>');
   if(a==='shop')return openModal('المتجر',
     '<div class="r"><span>💎 100 جوهرة</span><span style="color:#ffd54f">1000 🪙</span></div>'
-    +'<div class="r"><span>🛡 ترقية المدرعة</span><span style="color:#ffd54f">500 🪙</span></div>'
-    +'<div class="r"><span>🔥 قذائف سريعة ×10</span><span style="color:#ffd54f">250 🪙</span></div>');
+    +'<div class="r"><span>🔓 فتح VALKYRIE</span><span style="color:#ffd54f">500 🪙</span></div>'
+    +'<div class="r"><span>🔓 فتح TITAN</span><span style="color:#ffd54f">800 🪙</span></div>'
+    +'<div class="r"><span>🔓 فتح BLAZE</span><span style="color:#00e5ff">20 💎</span></div>'
+    +'<div class="r"><span>🔓 فتح NOVA</span><span style="color:#00e5ff">50 💎</span></div>'
+    +'<div class="r"><span>🔓 فتح VIPER</span><span style="color:#00e5ff">75 💎</span></div>'
+    +'<div class="r"><span>🔓 فتح INFERNO</span><span style="color:#00e5ff">100 💎</span></div>');
   if(a==='maps')return openModal('الخرائط',
-    '<div class="r"><span>🗺 ساحة التدريب</span><span style="color:#7dff56">✓ مفتوحة</span></div>'
-    +'<div class="r"><span>🏭 مصنع مهجور</span><span style="color:#9a9a9a">🔒</span></div>'
-    +'<div class="r"><span>🏜 صحراء الجحيم</span><span style="color:#9a9a9a">🔒</span></div>'
-    +'<div class="r"><span>❄ أرض الجليد</span><span style="color:#9a9a9a">🔒</span></div>');
+    '<div class="r"><span>🗺 ساحة التدريب</span><span style="color:#7dff56">✓</span></div>'
+    +'<div class="r"><span>🏭 مصنع</span><span style="color:#9a9a9a">🔒</span></div>');
   if(a==='achievements')return openModal('الإنجازات',
     '<div class="r"><span>🎯 أول فوز</span><span style="color:#7dff56">✓</span></div>'
-    +'<div class="r"><span>💀 10 قتلات</span><span>3/10</span></div>'
-    +'<div class="r"><span>🏆 50 قتلة</span><span>0/50</span></div>');
+    +'<div class="r"><span>💀 10 قتلات</span><span>3/10</span></div>');
   if(a==='inventory')return openModal('الحقيبة',
-    '<div class="r"><span>🔫 مدفع أساسي</span><span style="color:#00e5ff">مفعّل</span></div>'
-    +'<div class="r"><span>🛡 درع خفيف</span><span style="color:#00e5ff">مفعّل</span></div>'
-    +'<div class="r"><span>💥 قذيفة HE</span><span>×5</span></div>');
+    '<div class="r"><span>🔫 مدفع</span><span style="color:#00e5ff">مفعّل</span></div>'
+    +'<div class="r"><span>🛡 درع</span><span style="color:#00e5ff">مفعّل</span></div>');
   if(a==='daily'){
     cur.gold+=200;cur.gems+=5;saveP(cur);hud(cur);S.coin();
     var b=$('bdg');if(b)b.style.display='none';
@@ -772,19 +1218,13 @@ function act(a){
   if(a==='profile'){
     var rate=cur.matches?Math.round((cur.wins/cur.matches)*100):0;
     return openModal('الملف الشخصي',
-      '<div style="text-align:center;margin-bottom:16px">'
-      +'<div style="width:76px;height:76px;border-radius:50%;margin:0 auto 12px;'
-      +'background:linear-gradient(135deg,#ffb347,#ff7b00);display:flex;'
-      +'align-items:center;justify-content:center;font-size:30px;font-weight:900;'
-      +'border:3px solid #fff;box-shadow:0 0 30px rgba(255,123,0,.8)">'+(cur.avatar||'C')+'</div>'
-      +'<div style="font-size:18px;font-weight:900">'+cur.username+'</div>'
-      +'</div>'
-      +'<div class="r"><span>🏆 المستوى</span><span style="color:#ffb347;font-weight:900">'+cur.level+'</span></div>'
+      '<div style="font-size:18px;font-weight:900;text-align:center;margin-bottom:12px">'+cur.username+'</div>'
+      +'<div class="r"><span>🏆 المستوى</span><span style="color:#ffb347">'+cur.level+'</span></div>'
       +'<div class="r"><span>🎯 المباريات</span><span>'+cur.matches+'</span></div>'
-      +'<div class="r"><span>🥇 الانتصارات</span><span style="color:#7dff56;font-weight:900">'+cur.wins+'</span></div>'
-      +'<div class="r"><span>💀 القتلات</span><span style="color:#ff6b6b;font-weight:900">'+cur.kills+'</span></div>'
+      +'<div class="r"><span>🥇 الانتصارات</span><span style="color:#7dff56">'+cur.wins+'</span></div>'
+      +'<div class="r"><span>💀 القتلات</span><span style="color:#ff6b6b">'+cur.kills+'</span></div>'
       +'<div class="r"><span>📊 نسبة الفوز</span><span>'+rate+'%</span></div>'
-      +'<button class="bclose" style="background:linear-gradient(180deg,#dc2626,#991b1b);box-shadow:0 5px 0 #5a0000" onclick="logout()">🚪 تسجيل الخروج</button>');
+      +'<button class="bclose" style="background:linear-gradient(180deg,#dc2626,#991b1b)" onclick="logout()">🚪 تسجيل الخروج</button>');
   }
   toast('🚧 قيد التطوير');
 }
@@ -794,7 +1234,7 @@ function logout(){
 }
 window.logout=logout;
 
-/* BOOT */
+/* ============ BOOT ============ */
 window.addEventListener('DOMContentLoaded',function(){
   setTimeout(splash,100);
 });
